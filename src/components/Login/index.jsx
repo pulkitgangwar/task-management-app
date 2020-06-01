@@ -1,7 +1,7 @@
 import React from "react";
 
 // importing Components
-import SideBar from "./SideBar";
+import SideBar from "../../Utils/SideBar";
 import Form from "./Form";
 
 const Login = () => {
