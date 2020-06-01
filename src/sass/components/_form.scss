@@ -1,0 +1,35 @@
+.form {
+  width: 60%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__heading {
+    margin-bottom: 5rem;
+    font-size: 6rem;
+  }
+
+  &__div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
+  &__input {
+    background-color: $color-grey;
+    border: none;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    padding: 1rem;
+    font-family: inherit;
+  }
+
+  &__btn--wrapper {
+    margin-bottom: 1rem;
+  }
+}
