@@ -3,9 +3,18 @@
   height: 100vh;
   display: flex;
 
+  @media only screen and (max-width: $bp-large) {
+    flex-direction: column;
+  }
+
   &__sidebar {
     width: 30%;
     height: 100%;
+
+    @media only screen and (max-width: $bp-large) {
+      width: 100%;
+      height: 10%;
+    }
   }
 
   &__form {
@@ -14,5 +23,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media only screen and (max-width: $bp-large) {
+      width: 100%;
+      height: 90%;
+    }
   }
 }

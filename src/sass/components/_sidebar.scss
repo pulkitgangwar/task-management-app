@@ -6,7 +6,14 @@
   position: relative;
   &__logo {
     padding: 2rem;
-    color:$color-white;
+    color: $color-white;
+
+    @media only screen and (max-width: $bp-large) {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__placeholder {
@@ -17,6 +24,15 @@
       position: absolute;
       bottom: -4rem;
       right: 5rem;
+
+      @media only screen and (max-width: $bp-largest) {
+        font-size: 7rem;
+        bottom: -3rem;
+      }
+
+      @media only screen and (max-width: $bp-large) {
+        display: none;
+      }
     }
 
     &__sub {
@@ -26,6 +42,16 @@
       position: absolute;
       bottom: 17rem;
       right: -19rem;
+
+      @media only screen and (max-width: $bp-largest) {
+        font-size: 5rem;
+        bottom: 14rem;
+        right: -16rem;
+      }
+
+      @media only screen and (max-width: $bp-large) {
+        display: none;
+      }
     }
   }
 }
