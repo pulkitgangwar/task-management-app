@@ -1,10 +1,10 @@
 import React from "react";
 
 // importing Components
-import UnAuthApp from "./components/UnAuthApp";
+import AuthApp from "./components/AuthApp";
 
 const App = () => {
-  return <UnAuthApp />;
+  return <AuthApp />;
 };
 
 export default App;
