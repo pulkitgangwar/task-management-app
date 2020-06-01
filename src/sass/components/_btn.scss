@@ -11,6 +11,21 @@
     border: none;
     background-color: $primary-color;
     color: $color-white;
+    border-radius: 5px;
     cursor: pointer;
+  }
+
+  &--secondary {
+    padding:.5rem 2rem;
+    font-size:1.8rem;
+    background-color: transparent;
+    border: 5px solid $primary-color;
+    color: $primary-color;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $color-white;
+    }
   }
 }
