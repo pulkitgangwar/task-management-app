@@ -33,7 +33,7 @@ const Form = () => {
         <button className="form__btn btn">Register</button>
       </div>
       <p className="form__extra">
-        Don't have a account ? <Link to="/">login</Link>
+        Already a member ? <Link to="/">login</Link>
       </p>
     </form>
   );
