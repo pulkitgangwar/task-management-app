@@ -2,8 +2,8 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 // importing Components
-import Login from "./Login/index";
-import Register from "./Register/index";
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 const UnAuthApp = () => {
   return (

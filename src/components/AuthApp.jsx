@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 // importing Components
-import Dashboard from "./Dashboard/index";
+import Dashboard from "./Dashboard/Dashboard";
 
 const AuthApp = () => {
   return (
