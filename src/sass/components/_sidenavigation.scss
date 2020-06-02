@@ -1,6 +1,6 @@
 .sidenavigation {
   top: 20vh;
-  position: fixed;
+  position: absolute;
   width: 20%;
   height: 100%;
   background-color: $primary-color;
@@ -28,6 +28,58 @@
       visibility: none;
       opacity: 0;
       pointer-events: none;
+    }
+  }
+
+  // navigation
+
+  &__ul {
+    width: 100%;
+
+    list-style: none;
+  }
+
+  &__li {
+    background-color: $color-grey-dark;
+    color: black;
+    &--wrapper {
+      padding: 1rem;
+    }
+  }
+
+  &__drop {
+    width: 100%;
+
+    &__title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    &__ul {
+      width: 100%;
+      background-color: $color-grey-light;
+      color: black;
+      list-style: none;
+      display: none;
+
+      &--active {
+        display: block;
+      }
+    }
+
+    &__li {
+      width: 100%;
+      padding: 2rem;
+      background-color: $color-grey-light;
+      border: 1px solid black;
+
+      &--active {
+        background-color: $primary-color;
+        color: $color-white;
+      }
     }
   }
 }
