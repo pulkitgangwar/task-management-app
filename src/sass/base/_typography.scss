@@ -46,4 +46,8 @@
 
 .paragraph-secondary {
   font-size: 1.8rem;
+
+  &--bold {
+    font-weight: 600;
+  }
 }
