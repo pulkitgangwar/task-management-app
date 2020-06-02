@@ -1,0 +1,31 @@
+.task {
+  width: 100%;
+  background-color: $color-grey-dark;
+  //   height: 200px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  padding:1rem;
+  cursor: pointer;
+  margin-bottom:1rem;
+
+  &__title-and-priority {
+    width: 100%;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+
+    &__title {
+      width: 60%;
+    }
+  }
+
+  &__status-date-and-label-icon {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+  }
+}
