@@ -1,13 +1,14 @@
 .sidenavigation {
-  position: absolute;
-  width: 350px;
+  top: 20vh;
+  position: fixed;
+  width: 20%;
   height: 100%;
   background-color: $primary-color;
   color: $color-white;
-  transform: translateX(-100%);
+  // transform: translateX(-100%);
   transition: all 0.4s ease-in-out;
 
-  &__slide-in {
-    transform: translateX(0);
+  &__navigation-off {
+    width: 0;
   }
 }

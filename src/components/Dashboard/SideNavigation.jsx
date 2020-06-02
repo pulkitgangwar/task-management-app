@@ -4,9 +4,13 @@ const SideNavigation = ({ isNavOpen }) => {
   return (
     <div
       className={`sidenavigation ${
-        isNavOpen ? "sidenavigation__slide-in" : ""
+        isNavOpen ? "" : "sidenavigation__navigation-off"
       }`}
-    ></div>
+    >
+      asldjf
+      alskdjf
+      alksdfj
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import FilterNav from "./FilterNav";
 import TaskDashboard from "./TaskDashboard";
 
 const Dashboard = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
 
   return (
     <div className="dashboard">

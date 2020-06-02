@@ -7,26 +7,38 @@ import Task from "./Task";
 const TaskDashboard = ({ isNavOpen }) => {
   return (
     <div className="taskdashboard">
-      <div className="taskdashboard__sidenavigation">
+      <div
+        className={`taskdashboard__sidenavigation ${
+          isNavOpen ? "" : "taskdashboard__sidenavigation__navigation-off"
+        }`}
+      >
         <SideNavigation isNavOpen={isNavOpen} />
       </div>
-      <div className="taskdashboard__header">
-        <h3 className="heading-tertiary heading-tertiary--small taskdashboard__task-count">
-          Total Tasks : 2
-        </h3>
-        <div className="taskdashboard__btn--wrapper">
-          <button className="btn taskdashboard__btn">Add Task</button>
-        </div>
-      </div>
 
-      <div className="taskdashboard__task">
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
+      <div
+        className={`taskdashboard__wrapper ${
+          isNavOpen ? "" : "taskdashboard__wrapper__navigation-off"
+        }`}
+      >
+        <div className="spacer"></div>
+        <div className="taskdashboard__header">
+          <h3 className="heading-tertiary heading-tertiary--small taskdashboard__task-count">
+            Total Tasks : 2
+          </h3>
+          <div className="taskdashboard__btn--wrapper">
+            <button className="btn taskdashboard__btn">Add Task</button>
+          </div>
+        </div>
+
+        <div className="taskdashboard__task">
+          <Task />
+          <Task />
+          <Task />
+          <Task />
+          <Task />
+          <Task />
+          <Task />
+        </div>
       </div>
     </div>
   );
