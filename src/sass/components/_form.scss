@@ -38,4 +38,15 @@
   &__btn--wrapper {
     margin-bottom: 1rem;
   }
+
+  &__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  &__textarea{
+    height:120px;
+  }
 }
