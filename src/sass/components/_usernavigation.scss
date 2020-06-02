@@ -1,0 +1,22 @@
+.usernavigation {
+  width: 350px;
+  height: 100%;
+  top: 0;
+  right: 0;
+  position: absolute;
+  background-color: $color-grey-dark;
+  transform: translateX(100%);
+  transition: all 0.4s ease-in-out;
+
+  &__slide-in {
+    transform: translateX(0);
+  }
+
+  &__close {
+    font-size: 5rem;
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    cursor: pointer;
+  }
+}
