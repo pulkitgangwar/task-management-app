@@ -7,9 +7,9 @@ const SideNavigation = ({ isNavOpen }) => {
         isNavOpen ? "" : "sidenavigation__navigation-off"
       }`}
     >
-      asldjf
-      alskdjf
-      alksdfj
+      <div className={`sidenavigation__content ${
+        isNavOpen ? "" : "sidenavigation__content__navigation-off"
+      }`}>asldjf alskdjf alksdfj</div>
     </div>
   );
 };

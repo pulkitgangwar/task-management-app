@@ -11,4 +11,14 @@
   &__navigation-off {
     width: 0;
   }
+
+  &__content {
+    transition: all 0.4s ease-in-out;
+
+    &__navigation-off {
+      visibility: none;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
 }
