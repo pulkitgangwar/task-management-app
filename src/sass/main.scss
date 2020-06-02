@@ -10,8 +10,10 @@
 @import "./components/navigation";
 @import "./components/sidebar";
 @import "./components/sidenavigation";
+@import "./components/usernavigation";
 
 // @layout
+@import "./layout/dashboard";
 @import "./layout/login";
 @import "./layout/register";
 @import "./layout/taskdashboard";
