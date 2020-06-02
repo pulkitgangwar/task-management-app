@@ -11,10 +11,24 @@
   top: 10vh;
   z-index: 10;
 
+  @media only screen and (max-width: $bp-medium) {
+    flex-direction: column;
+    padding: 0;
+    justify-content: center;
+    height: 15vh;
+  }
+
   &__search {
     width: 50%;
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      width: 100%;
+      margin: 0 auto;
+      justify-content: center;
+      margin-bottom:2rem;
+    }
 
     &__input {
       margin-right: 1rem;
@@ -24,9 +38,18 @@
       border-radius: 0.5rem;
       border: none;
       font-family: inherit;
+
+      @media only screen and (max-width: $bp-medium) {
+        padding: 0.8rem;
+        font-size: 1.2rem;
+      }
     }
   }
 
   &__sort {
+    @media only screen and (max-width: $bp-medium) {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
