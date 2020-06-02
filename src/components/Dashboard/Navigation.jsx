@@ -1,11 +1,15 @@
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+// import {GrClose} from "react-icons/gr";
 
-const Navigation = () => {
+const Navigation = ({ setIsNavOpen, isNavOpen }) => {
   return (
     <nav className="navigation">
       <div className="navigation__heading">
-        <div className="navigation__hamburger-toggle">
+        <div
+          className="navigation__hamburger-toggle"
+          onClick={() => setIsNavOpen(!isNavOpen)}
+        >
           <GiHamburgerMenu size="4rem" />
         </div>
         <h2 className="navigation__heading__logo">Logo</h2>

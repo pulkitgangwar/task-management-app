@@ -8,6 +8,10 @@
   align-items: center;
   padding: 2rem;
 
+  &__hamburger-toggle{
+    cursor: pointer;
+  }
+
   &__heading {
     height: 100%;
     display: flex;
