@@ -2,7 +2,7 @@ import React from "react";
 
 // importing Components
 import SideBar from "../SideBar";
-import Form from "./Form";
+import Form from "./LoginForm";
 
 const Login = () => {
   return (
