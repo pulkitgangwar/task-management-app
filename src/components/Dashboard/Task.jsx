@@ -1,11 +1,13 @@
 import React from "react";
 
-const Task = () => {
+const Task = ({task}) => {
+  const {id,title,status,due_date,label} = task;
+
   return (
-    <div className="task">
+    <div className="task" id={id}>
       <div className="task__title-and-priority">
         <h3 className="heading-tertiary task__title-and-priority__title">
-          Lorem ipsum
+          {title}
         </h3>
         <div className="task__title-and-priority__priority">
           Priority for stars
@@ -13,12 +15,14 @@ const Task = () => {
       </div>
       <div className="task__status-date-and-label-icon">
         <p className="paragraph-secondary paragraph-secondary--bold task__status-date-and-label-icon__status">
-          Status
+          {status.toLowerCase()}
         </p>
         <p className="paragraph-secondary paragraph-secondary--bold task__status-date-and-label-icon__date">
-          Due Date
+          {due_date && due_date}
         </p>
-        <div className="task__status-date-and-label-icon__label-icon">icon</div>
+        <div className="task__status-date-and-label-icon__label-icon">
+          {label}
+        </div>
       </div>
     </div>
   );
