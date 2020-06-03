@@ -47,11 +47,16 @@ const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
+      setLoading(true);
       const response = await authClient.login(email, password);
-      console.log(response);
+      setLoading(false);
+      setError(false);
       localStorage.setItem("access", JSON.stringify(response));
       checkIsLoggedIn();
     } catch (err) {
+      checkIsLoggedIn();
+      setError(err);
+      setLoading(false);
       console.log(err);
     }
   };
