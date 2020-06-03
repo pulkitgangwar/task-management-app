@@ -2,6 +2,9 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
+// importing auth context provider
+import AuthProvider from "./context/Auth.context";
+
 // importing App
 import App from "./App";
 
@@ -9,8 +12,10 @@ import App from "./App";
 import "./sass/main.scss";
 
 render(
-  <Router>
-    <App />
-  </Router>,
+  <AuthProvider>
+    <Router>
+      <App />
+    </Router>
+  </AuthProvider>,
   document.getElementById("root")
 );

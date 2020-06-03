@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // importing Components
-import AuthApp from "./components/AuthApp";
+import UnAuthApp from "./components/UnAuthApp";
+
+// importing context consumer
+import { Auth } from "./context/Auth.context";
 
 const App = () => {
-  return <AuthApp />;
+  return <UnAuthApp />;
 };
 
 export default App;
