@@ -31,6 +31,27 @@ class TaskClient {
         });
     });
   }
+
+  // read
+  getTaskById(id) {
+    return new Promise((resolve, reject) => {
+      this.instance
+        .get(`/tasks/${id}`)
+        .then((data) => {
+          resolve(data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+          if (Array.isArray(err.response.data.message)) {
+            reject(err.response.data.message[0]);
+            return;
+          } else if (err.response.data.message) {
+            reject(err.response.data.message);
+            return;
+          }
+        });
+    });
+  }
 }
 
 export const taskClient = new TaskClient();
