@@ -12,10 +12,10 @@ import App from "./App";
 import "./sass/main.scss";
 
 render(
-  <AuthProvider>
-    <Router>
+  <Router>
+    <AuthProvider>
       <App />
-    </Router>
-  </AuthProvider>,
+    </AuthProvider>
+  </Router>,
   document.getElementById("root")
 );
