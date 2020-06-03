@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 // importing Components
 import AddTaskForm from "./AddTaskForm";
+import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 
 // importing Task Client
 import { taskClient } from "../../Utils/TaskClient";
@@ -46,6 +47,7 @@ const AddTask = () => {
 
   return (
     <div className="addtask">
+      <FloatingAnchor title="Go Back" path="/" />
       <AddTaskForm addTask={addTask} error={error} />
     </div>
   );
