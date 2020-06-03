@@ -32,7 +32,7 @@ const TaskDashboard = ({ isNavOpen, tasks, count }) => {
 
         <div className="taskdashboard__task">
           {tasks.length ? (
-            tasks.map((task) => <Task task={task} />)
+            tasks.map((task) => <Task task={task} key={task.id} />)
           ) : (
             <h1 className="taskdashboard__placeholder heading-secondary">
               Add a task to start
