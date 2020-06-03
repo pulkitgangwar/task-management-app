@@ -4,7 +4,7 @@ import React from "react";
 import SideNavigation from "./SideNavigation";
 import Task from "./Task";
 
-const TaskDashboard = ({ isNavOpen }) => {
+const TaskDashboard = ({ isNavOpen, tasks, count }) => {
   return (
     <div className="taskdashboard">
       <div
@@ -23,7 +23,7 @@ const TaskDashboard = ({ isNavOpen }) => {
         <div className="spacer"></div>
         <div className="taskdashboard__header">
           <h3 className="heading-tertiary heading-tertiary--small taskdashboard__task-count">
-            Total Tasks : 2
+            Total Tasks : {count}
           </h3>
           <div className="taskdashboard__btn--wrapper">
             <button className="btn taskdashboard__btn">Add Task</button>
@@ -31,13 +31,13 @@ const TaskDashboard = ({ isNavOpen }) => {
         </div>
 
         <div className="taskdashboard__task">
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
+          {tasks.length ? (
+            tasks.map((task) => <Task task={task} />)
+          ) : (
+            <h1 className="taskdashboard__placeholder heading-secondary">
+              Add a task to start
+            </h1>
+          )}
         </div>
       </div>
     </div>
