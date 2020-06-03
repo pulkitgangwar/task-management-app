@@ -47,7 +47,7 @@ class AuthClient {
       }
 
       this.instance
-        .post("/register", {
+        .post("/login", {
           email,
           password,
         })
