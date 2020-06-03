@@ -5,19 +5,45 @@ import DatePicker from "react-datepicker";
 // importing stylesheet
 import "react-datepicker/dist/react-datepicker.css";
 
-const Form = () => {
+const Form = ({ addTask, error }) => {
   const [selectedDateAndTime, setSelectedDateAndTime] = useState(null);
   const [isoTime, setIsoTime] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("PENDING");
+  const [label, setLabel] = useState("PERSONAL");
+  const [priority, setPriority] = useState("LOW");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    addTask({
+      title,
+      description,
+      status,
+      label,
+      priority,
+      due_date: isoTime,
+    });
+  };
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <h1 className="form__heading heading-primary">Add Task</h1>
+
+      <p>{error && error}</p>
 
       <div className="form__div form__div--title">
         <label htmlFor="form__input--title" className="form__label">
           Title
         </label>
-        <input type="name" className="form__input" id="form__input--title" />
+        <input
+          type="name"
+          className="form__input"
+          id="form__input--title"
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
       </div>
       <div className="form__div form__div--description">
         <label htmlFor="form__input--description" className="form__label">
@@ -27,6 +53,9 @@ const Form = () => {
           type="text"
           className="form__input form__textarea"
           id="form__input--description"
+          name="description"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
         />
       </div>
 
@@ -35,7 +64,11 @@ const Form = () => {
           <label htmlFor="form__input--status" className="form__label">
             Status
           </label>
-          <select id="form__input--status">
+          <select
+            id="form__input--status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
             <option value="PENDING">Pending</option>
             <option value="IN_PROGRESS">In Progress</option>
             <option value="DONE">Done</option>
@@ -45,7 +78,11 @@ const Form = () => {
           <label htmlFor="form__input--label" className="form__label">
             Label
           </label>
-          <select id="form__input--label">
+          <select
+            id="form__input--label"
+            value={label}
+            onChange={(e) => setLabel(e.target.value)}
+          >
             <option value="PERSONAL">Personal</option>
             <option value="WORK">Work</option>
             <option value="SHOPPING">Shopping</option>
@@ -60,7 +97,11 @@ const Form = () => {
           <label htmlFor="form__input--priority" className="form__label">
             Priority
           </label>
-          <select id="form__input--priority">
+          <select
+            id="form__input--priority"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
             <option value="LOW">Low</option>
             <option value="NORMAL">Normal</option>
             <option value="HIGH">High</option>
