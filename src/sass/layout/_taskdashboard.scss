@@ -39,6 +39,15 @@
     }
   }
 
+  &__placeholder{
+    color:$color-grey-dark;
+    width:100%;
+    height:42vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__header {
     width: 100%;
     height: 10vh;
