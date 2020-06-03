@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
 // import { Link } from "react-router-dom";
 
+// importing stylesheet
+import "react-datepicker/dist/react-datepicker.css";
+
 const Form = () => {
+  const [selectedDateAndTime, setSelectedDateAndTime] = useState(null);
+  const [isoTime, setIsoTime] = useState(null);
+
   return (
     <form className="form">
       <h1 className="form__heading heading-primary">Add Task</h1>
@@ -14,7 +21,7 @@ const Form = () => {
       </div>
       <div className="form__div form__div--description">
         <label htmlFor="form__input--description" className="form__label">
-          Description
+          Description (optional)
         </label>
         <textarea
           type="text"
@@ -59,6 +66,25 @@ const Form = () => {
             <option value="HIGH">High</option>
           </select>
         </div>
+      </div>
+
+      <div className="form__div form__div--date-picker">
+        <label htmlFor="form__input--date-picker" className="form__label">
+          Deadline for Task (optional)
+        </label>
+
+        <DatePicker
+          selected={selectedDateAndTime}
+          showTimeSelect
+          dateFormat="Pp"
+          onChange={(e) => {
+            setIsoTime(e.toISOString());
+            setSelectedDateAndTime(e);
+          }}
+          className="form__date-picker"
+          minDate={new Date()}
+          id="form__input--date-picker"
+        />
       </div>
 
       <div className="form__btn--wrapper">
