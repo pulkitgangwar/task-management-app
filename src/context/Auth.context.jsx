@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 // importing AuthClient
@@ -8,6 +8,10 @@ export const Auth = createContext();
 
 const AuthProvider = ({ children }) => {
   const authClient = new AuthClient();
+
+  useEffect(() => {
+    checkIsLoggedIn();
+  }, []);
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     JSON.parse(localStorage.getItem("access")) || null
