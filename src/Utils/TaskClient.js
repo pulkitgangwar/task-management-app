@@ -33,4 +33,6 @@ class TaskClient {
   }
 }
 
+export const taskClient = new TaskClient();
+
 export default TaskClient;
