@@ -1,5 +1,5 @@
 import React from "react";
-import { IoIosArrowDown } from "react-icons/io";
+// import { IoIosArrowDown } from "react-icons/io";
 
 const SideNavigation = ({ isNavOpen }) => {
   return (
