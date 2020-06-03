@@ -1,10 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 // importing Components
 import SideNavigation from "./SideNavigation";
 import Task from "./Task";
 
 const TaskDashboard = ({ isNavOpen, tasks, count }) => {
+  const { push } = useHistory();
   return (
     <div className="taskdashboard">
       <div
@@ -26,7 +28,12 @@ const TaskDashboard = ({ isNavOpen, tasks, count }) => {
             Total Tasks : {count}
           </h3>
           <div className="taskdashboard__btn--wrapper">
-            <button className="btn taskdashboard__btn">Add Task</button>
+            <button
+              className="btn taskdashboard__btn"
+              onClick={() => push("/addtask")}
+            >
+              Add Task
+            </button>
           </div>
         </div>
 
