@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Auth } from "../../context/Auth.context";
 
 const Form = () => {
-  const auth = useContext(Auth);
+  const { register, loading, error } = useContext(Auth);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +13,7 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    auth.register(name, email, password);
+    register(name, email, password);
 
     // console.log(name, email, password);
   };
@@ -21,6 +21,8 @@ const Form = () => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h1 className="form__heading heading-primary">Register</h1>
+
+      <p>{error && error}</p>
 
       <div className="form__div form__div--name">
         <label htmlFor="form__input--name" className="form__label">
@@ -66,7 +68,9 @@ const Form = () => {
       </div>
 
       <div className="form__btn--wrapper">
-        <button className="form__btn btn">Register</button>
+        <button className="form__btn btn">
+          {loading ? "Loading ..." : "Register"}
+        </button>
       </div>
       <p className="form__extra">
         Already a member ? <Link to="/">login</Link>
