@@ -7,16 +7,28 @@ import AuthClient from "../Utils/AuthClient";
 export const Auth = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isLoggedIn] = useState(localStorage.getItem("access") ? true : false);
+  const authClient = new AuthClient();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("access")) || null
+  );
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { push } = useHistory();
 
+  const checkIsLoggedIn = () => {
+    if (localStorage.getItem("access")) {
+      setIsLoggedIn(JSON.parse(localStorage.getItem("access")));
+      return;
+    }
+
+    setIsLoggedIn(null);
+  };
+
   const register = async (name, email, password) => {
     try {
       console.log(name, email, password);
-      const authClient = new AuthClient();
       setLoading(true);
       await authClient.register(name, email, password);
       setLoading(false);
@@ -33,12 +45,20 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = (email, password) => {
-    console.log(email, password);
+  const login = async (email, password) => {
+    try {
+      const response = await authClient.login(email, password);
+      console.log(response);
+      localStorage.setItem("access", JSON.stringify(response));
+      checkIsLoggedIn();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const logout = () => {
-    console.log("log out!");
+    localStorage.clear();
+    checkIsLoggedIn();
   };
 
   return (
