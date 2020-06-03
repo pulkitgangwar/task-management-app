@@ -1,10 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
-const Task = ({task}) => {
-  const {id,title,status,due_date,label} = task;
+const Task = ({ task }) => {
+  const { push } = useHistory();
+  const { id, title, status, due_date, label } = task;
 
   return (
-    <div className="task" id={id}>
+    <div className="task" id={id} onClick={() => push(`/tasks/${id}`)}>
       <div className="task__title-and-priority">
         <h3 className="heading-tertiary task__title-and-priority__title">
           {title}
