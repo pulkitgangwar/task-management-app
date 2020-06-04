@@ -6,7 +6,7 @@ import FilterNav from "./FilterNav";
 import TaskDashboard from "./TaskDashboard";
 
 // importing Client
-import { taskClient } from "../../Utils/TaskClient";
+import { taskClient } from "../../apiClients/TaskClient";
 
 const Dashboard = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);

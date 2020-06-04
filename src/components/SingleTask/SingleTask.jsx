@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // importing TaskClient
-import { taskClient } from "../../Utils/TaskClient";
+import { taskClient } from "../../apiClients/TaskClient";
 
 const SingleTask = ({ match }) => {
   const [loading, setLoading] = useState(true);

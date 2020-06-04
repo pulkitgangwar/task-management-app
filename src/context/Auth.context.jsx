@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 // importing AuthClient
-import AuthClient from "../Utils/AuthClient";
+import AuthClient from "../apiClients/AuthClient";
 
 export const Auth = createContext();
 

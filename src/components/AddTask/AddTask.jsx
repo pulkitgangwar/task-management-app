@@ -6,7 +6,7 @@ import AddTaskForm from "./AddTaskForm";
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 
 // importing Task Client
-import { taskClient } from "../../Utils/TaskClient";
+import { taskClient } from "../../apiClients/TaskClient";
 
 const AddTask = () => {
   const [loading, setLoading] = useState(false);
