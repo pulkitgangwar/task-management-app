@@ -38,4 +38,15 @@
       color: $color-white;
     }
   }
+
+  &--danger {
+    background-color: $color-danger;
+
+    color: $color-white;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      background-color: rgba($color-danger, 0.8);
+    }
+  }
 }

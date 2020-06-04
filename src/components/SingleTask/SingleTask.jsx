@@ -52,6 +52,10 @@ const SingleTask = ({ match }) => {
     <div className="singletask">
       <div className="singletask__wrapper">
         <FloatingAnchor path="/" title="Go back" />
+        <div className="singletask__cta-btns">
+          <button className="btn singletask__cta-btns__edit">Edit Task</button>
+          <button className="btn btn--danger singletask__cta-btns__delete">Delete</button>
+        </div>
         <div className="singletask__title">
           <p className="singletask__title__placeholder">Title</p>
           <h3 className="heading-tertiary singletask__title__title ">
