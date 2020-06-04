@@ -53,6 +53,16 @@ const SingleTask = ({ match, history }) => {
     history.push(`/edittask/${id}`);
   };
 
+  const deleteTaskById = async (id) => {
+    try {
+      await taskClient.deleteTaskById(id);
+
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="singletask">
       <div className="singletask__wrapper">
@@ -64,7 +74,10 @@ const SingleTask = ({ match, history }) => {
           >
             Edit Task
           </button>
-          <button className="btn btn--danger singletask__cta-btns__delete">
+          <button
+            className="btn btn--danger singletask__cta-btns__delete"
+            onClick={() => deleteTaskById(task.id)}
+          >
             Delete
           </button>
         </div>
