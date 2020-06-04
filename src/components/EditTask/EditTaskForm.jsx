@@ -5,19 +5,59 @@ import DatePicker from "react-datepicker";
 // importing stylesheet
 import "react-datepicker/dist/react-datepicker.css";
 
-const Form = () => {
-  const [selectedDateAndTime, setSelectedDateAndTime] = useState(null);
+const Form = ({ task, updateTaskById, error }) => {
+  const [selectedDateAndTime, setSelectedDateAndTime] = useState(
+    task.due_date ? new Date(task.due_date) : null
+  );
   const [isoTime, setIsoTime] = useState(null);
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(
+    task.description ? task.description : ""
+  );
+  const [status, setStatus] = useState(task.status);
+  const [label, setLabel] = useState(task.label);
+  const [priority, setPriority] = useState(task.priority);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log({
+      title: title,
+      description: description,
+      label: label,
+      status: status,
+      priority: priority,
+      due_date: isoTime,
+    });
+
+    updateTaskById(task.id, {
+      title: title,
+      description: description,
+      label: label,
+      status: status,
+      priority: priority,
+      due_date: isoTime,
+    });
+  };
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <h1 className="form__heading heading-primary">Edit Task</h1>
+
+      <p>{error && error}</p>
 
       <div className="form__div form__div--title">
         <label htmlFor="form__input--title" className="form__label">
           Title
         </label>
-        <input type="name" className="form__input" id="form__input--title" />
+        <input
+          type="name"
+          className="form__input"
+          id="form__input--title"
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
       </div>
       <div className="form__div form__div--description">
         <label htmlFor="form__input--description" className="form__label">
@@ -27,6 +67,9 @@ const Form = () => {
           type="text"
           className="form__input form__textarea"
           id="form__input--description"
+          name="description"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
         />
       </div>
 
@@ -35,7 +78,11 @@ const Form = () => {
           <label htmlFor="form__input--status" className="form__label">
             Status
           </label>
-          <select id="form__input--status">
+          <select
+            id="form__input--status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
             <option value="PENDING">Pending</option>
             <option value="IN_PROGRESS">In Progress</option>
             <option value="DONE">Done</option>
@@ -45,7 +92,11 @@ const Form = () => {
           <label htmlFor="form__input--label" className="form__label">
             Label
           </label>
-          <select id="form__input--label">
+          <select
+            id="form__input--label"
+            value={label}
+            onChange={(e) => setLabel(e.target.value)}
+          >
             <option value="PERSONAL">Personal</option>
             <option value="WORK">Work</option>
             <option value="SHOPPING">Shopping</option>
@@ -60,7 +111,11 @@ const Form = () => {
           <label htmlFor="form__input--priority" className="form__label">
             Priority
           </label>
-          <select id="form__input--priority">
+          <select
+            id="form__input--priority"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
             <option value="LOW">Low</option>
             <option value="NORMAL">Normal</option>
             <option value="HIGH">High</option>
@@ -88,7 +143,7 @@ const Form = () => {
       </div>
 
       <div className="form__btn--wrapper">
-        <button className="form__btn btn">Add Task</button>
+        <button className="form__btn btn">Edit Task</button>
       </div>
     </form>
   );
