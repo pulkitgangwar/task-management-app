@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 // importing TaskClient
 import { taskClient } from "../../apiClients/TaskClient";
 
+// importing components
+import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
+
 const SingleTask = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,6 +51,7 @@ const SingleTask = ({ match }) => {
   return (
     <div className="singletask">
       <div className="singletask__wrapper">
+        <FloatingAnchor path="/" title="Go back" />
         <div className="singletask__title">
           <p className="singletask__title__placeholder">Title</p>
           <h3 className="heading-tertiary singletask__title__title ">
