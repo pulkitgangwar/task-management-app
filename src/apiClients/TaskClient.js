@@ -124,6 +124,27 @@ class TaskClient {
         });
     });
   }
+
+  // delete
+
+  deleteTaskById(id) {
+    return new Promise((resolve, reject) => {
+      if (!id) {
+        reject("Please give a id");
+        return;
+      }
+
+      this.instance
+        .delete(`tasks/${id}`)
+        .then((response) => {
+          resolve("task Deleted!");
+        })
+        .catch((err) => {
+          reject(err.response);
+          console.log(err.response);
+        });
+    });
+  }
 }
 
 export const taskClient = new TaskClient();
