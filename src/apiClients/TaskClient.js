@@ -86,6 +86,44 @@ class TaskClient {
         });
     });
   }
+
+  // update
+
+  updateTask(id, { title, description, status, label, priority, due_date }) {
+    return new Promise((resolve, reject) => {
+      if (!id || !title) {
+        reject("please fill important fields");
+        return;
+      }
+
+      this.instance
+        .put(`/tasks/${id}`, {
+          title,
+          description,
+          status,
+          label,
+          priority,
+          due_date,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            resolve("updated the Task");
+          }
+        })
+        .catch((err) => {
+          console.log(err.response);
+          if (err.response.data) {
+            if (Array.isArray(err.response.data.message)) {
+              reject(err.response.data.message[0]);
+              return;
+            } else if (err.response.data.message) {
+              reject(err.response.data.message);
+              return;
+            }
+          }
+        });
+    });
+  }
 }
 
 export const taskClient = new TaskClient();
