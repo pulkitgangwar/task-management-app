@@ -6,7 +6,7 @@ import { taskClient } from "../../apiClients/TaskClient";
 // importing components
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 
-const SingleTask = ({ match }) => {
+const SingleTask = ({ match, history }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [task, setTask] = useState(null);
@@ -39,6 +39,7 @@ const SingleTask = ({ match }) => {
   }
 
   const {
+    id,
     title,
     description,
     created_at,
@@ -48,13 +49,24 @@ const SingleTask = ({ match }) => {
     status,
   } = task;
 
+  const handleEdit = () => {
+    history.push(`/edittask/${id}`);
+  };
+
   return (
     <div className="singletask">
       <div className="singletask__wrapper">
         <FloatingAnchor path="/" title="Go back" />
         <div className="singletask__cta-btns">
-          <button className="btn singletask__cta-btns__edit">Edit Task</button>
-          <button className="btn btn--danger singletask__cta-btns__delete">Delete</button>
+          <button
+            className="btn singletask__cta-btns__edit"
+            onClick={handleEdit}
+          >
+            Edit Task
+          </button>
+          <button className="btn btn--danger singletask__cta-btns__delete">
+            Delete
+          </button>
         </div>
         <div className="singletask__title">
           <p className="singletask__title__placeholder">Title</p>
