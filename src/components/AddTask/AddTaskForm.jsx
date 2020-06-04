@@ -43,6 +43,7 @@ const Form = ({ addTask, error }) => {
           name="title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
+          autoComplete="off"
         />
       </div>
       <div className="form__div form__div--description">
@@ -56,6 +57,7 @@ const Form = ({ addTask, error }) => {
           name="description"
           onChange={(e) => setDescription(e.target.value)}
           value={description}
+          autoComplete="off"
         />
       </div>
 
@@ -115,6 +117,7 @@ const Form = ({ addTask, error }) => {
         </label>
 
         <DatePicker
+          autoComplete='off'
           selected={selectedDateAndTime}
           showTimeSelect
           dateFormat="Pp"

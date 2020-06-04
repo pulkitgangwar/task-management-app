@@ -5,6 +5,7 @@ import { taskClient } from "../../apiClients/TaskClient";
 
 // importing Components
 import EditTaskForm from "./EditTaskForm";
+import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 
 const EditTask = ({ match, history }) => {
   const [loading, setLoading] = useState(true);
@@ -50,6 +51,7 @@ const EditTask = ({ match, history }) => {
 
   return (
     <div className="edittask">
+      <FloatingAnchor path={`/tasks/${task.id}`} title="Go back" />
       <EditTaskForm task={task} updateTaskById={updateTaskById} error={error} />
     </div>
   );

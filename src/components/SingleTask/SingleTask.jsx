@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {formatDistance,format} from "date-fns";
 
 // importing TaskClient
 import { taskClient } from "../../apiClients/TaskClient";
@@ -119,7 +120,11 @@ const SingleTask = ({ match, history }) => {
               Due date and time
             </p>
             <h3 className="singletask__time__due_date__due_date singletask__value">
-              {due_date ? due_date : "Add due date and time"}
+              {due_date
+                ? formatDistance(new Date(due_date), new Date(), {
+                    addSuffix: true,
+                  })
+                : "Add due date and time"}
             </h3>
           </div>
           <div className="singletask__time__created-at">
@@ -127,7 +132,7 @@ const SingleTask = ({ match, history }) => {
               Created at
             </p>
             <h3 className="singletask__time__created-at__created-at singletask__value">
-              {created_at}
+              {format(new Date(created_at), "dd-MM-yyyy HH:mm:ss a")}
             </h3>
           </div>
         </div>
