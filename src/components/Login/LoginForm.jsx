@@ -19,7 +19,7 @@ const Form = () => {
     <form className="form" onSubmit={handleSubmit}>
       <h1 className="form__heading heading-primary">Login</h1>
 
-      <p>{error && error}</p>
+      <p className="error">{error && error}</p>
       <div className="form__div form__div--email">
         <label htmlFor="form__input--email" className="form__label">
           Email

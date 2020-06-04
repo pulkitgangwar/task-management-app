@@ -44,7 +44,7 @@ const Form = ({ task, updateTaskById, error }) => {
     <form className="form" onSubmit={handleSubmit}>
       <h1 className="form__heading heading-primary">Edit Task</h1>
 
-      <p>{error && error}</p>
+      <p className="error">{error && error}</p>
 
       <div className="form__div form__div--title">
         <label htmlFor="form__input--title" className="form__label">
