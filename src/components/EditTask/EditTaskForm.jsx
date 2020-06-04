@@ -131,7 +131,7 @@ const Form = ({ task, updateTaskById, error }) => {
         </label>
 
         <DatePicker
-          autoComplete='off'
+          autoComplete="off"
           selected={selectedDateAndTime}
           showTimeSelect
           dateFormat="Pp"
@@ -143,6 +143,14 @@ const Form = ({ task, updateTaskById, error }) => {
           minDate={new Date()}
           id="form__input--date-picker"
         />
+        <div>
+          <span
+            className="btn btn--danger btn--danger--small"
+            onClick={(e) => setSelectedDateAndTime(null)}
+          >
+            Remove Deadline
+          </span>
+        </div>
       </div>
 
       <div className="form__btn--wrapper">

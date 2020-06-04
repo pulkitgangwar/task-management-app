@@ -45,6 +45,12 @@
     color: $color-white;
     transition: all 0.4s ease-in-out;
 
+    &--small {
+      padding: 0.5rem 2rem;
+      text-transform: capitalize;
+      font-size:1.5rem;
+    }
+
     &:hover {
       background-color: rgba($color-danger, 0.8);
     }
