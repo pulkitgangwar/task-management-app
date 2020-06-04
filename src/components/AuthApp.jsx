@@ -12,7 +12,7 @@ const AuthApp = () => {
     <Switch>
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/addtask" component={AddTask} />
-      <Route exact path="/edittask" component={EditTask} />
+      <Route exact path="/edittask/:id" component={EditTask} />
       <Route exact path="/tasks/:id" component={SingleTask} />
       <Route exact render={() => <h1>Page Not Found</h1>} />
     </Switch>
