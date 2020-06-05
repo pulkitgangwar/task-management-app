@@ -5,7 +5,9 @@ class TaskClient {
     this.instance = axios.create({
       baseURL: process.env.REACT_APP_API_URL,
     });
+  }
 
+  instanciatingAxios() {
     this.instance.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${JSON.parse(localStorage.getItem("access"))}`;
@@ -14,8 +16,9 @@ class TaskClient {
   //   read
   getTasks() {
     return new Promise((resolve, reject) => {
+      this.instanciatingAxios();
       this.instance
-        .get("/tasks")
+        .get(`/tasks`)
         .then((data) => {
           resolve(data.data);
         })
@@ -35,6 +38,7 @@ class TaskClient {
   // read
   getTaskById(id) {
     return new Promise((resolve, reject) => {
+      this.instanciatingAxios();
       this.instance
         .get(`/tasks/${id}`)
         .then((data) => {
@@ -56,6 +60,7 @@ class TaskClient {
   // read
   filterTasks(filterObj) {
     return new Promise((resolve, reject) => {
+      this.instanciatingAxios();
       const questionMark = ["?"];
       const queryParams = Object.keys(filterObj)
         .map((filterKey) => {
@@ -93,6 +98,7 @@ class TaskClient {
 
   addTask({ title, description, status, label, priority, due_date }) {
     return new Promise((resolve, reject) => {
+      this.instanciatingAxios();
       if (!title || !status || !label || !priority) {
         reject("Please fill out all the important fields");
         return;
@@ -127,6 +133,7 @@ class TaskClient {
 
   updateTask(id, { title, description, status, label, priority, due_date }) {
     return new Promise((resolve, reject) => {
+      this.instanciatingAxios();
       if (!id || !title) {
         reject("please fill important fields");
         return;
@@ -165,6 +172,7 @@ class TaskClient {
 
   deleteTaskById(id) {
     return new Promise((resolve, reject) => {
+      this.instanciatingAxios();
       if (!id) {
         reject("Please give a id");
         return;
