@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // importing Components
 import Navigation from "./Navigation";
@@ -23,6 +23,7 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState(null);
   const [count, setCount] = useState(0);
   const [userData, setUserData] = useState(null);
+  const dashboardRef = useRef();
 
   const [filters, setFilters] = useState(initialFilterState);
 
@@ -77,12 +78,20 @@ const Dashboard = () => {
     setIsNavOpen(!isNavOpen);
   };
 
+  const closeUserProfile = () => {
+    if (!isUserProfileOpen) {
+      return;
+    }
+
+    setIsUserProfileOpen(false);
+  };
+
   if (loading) {
     return <Loading />;
   }
 
   return (
-    <div className="dashboard">
+    <div ref={dashboardRef} onClick={closeUserProfile} className="dashboard">
       <UserPopup userData={userData} isUserProfileOpen={isUserProfileOpen} />
       <Navigation toggleUserProfile={toggleUserProfile} toggleNav={toggleNav} />
       <FilterNav
