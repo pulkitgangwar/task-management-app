@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 // importing Components
 import AddTaskForm from "./AddTaskForm";
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
+import Loading from "../Loading/Loading";
 
 // importing Task Client
 import { taskClient } from "../../apiClients/TaskClient";
@@ -42,7 +43,7 @@ const AddTask = () => {
   };
 
   if (loading) {
-    return <h1>Loading ....</h1>;
+    return <Loading />;
   }
 
   return (

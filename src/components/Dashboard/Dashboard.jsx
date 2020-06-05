@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Navigation from "./Navigation";
 import FilterNav from "./FilterNav";
 import TaskDashboard from "./TaskDashboard";
+import Loading from "../Loading/Loading";
 
 // importing Client
 import { taskClient } from "../../apiClients/TaskClient";
@@ -58,7 +59,7 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    return <h1>Loading ...</h1>;
+    return <Loading />;
   }
 
   return (

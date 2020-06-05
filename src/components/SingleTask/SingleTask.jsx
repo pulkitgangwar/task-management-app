@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {formatDistance,format} from "date-fns";
+import { formatDistance, format } from "date-fns";
 
 // importing TaskClient
 import { taskClient } from "../../apiClients/TaskClient";
 
 // importing components
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
+import Loading from "../Loading/Loading";
 
 const SingleTask = ({ match, history }) => {
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ const SingleTask = ({ match, history }) => {
   }, [match.params.id]);
 
   if (loading) {
-    return <h1>Loading ....</h1>;
+    return <Loading />;
   }
 
   if (!loading && error) {

@@ -6,6 +6,7 @@ import { taskClient } from "../../apiClients/TaskClient";
 // importing Components
 import EditTaskForm from "./EditTaskForm";
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
+import Loading from "../Loading/Loading";
 
 const EditTask = ({ match, history }) => {
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ const EditTask = ({ match, history }) => {
   }, [match.params.id]);
 
   if (loading) {
-    return <h1>Loading ....</h1>;
+    return <Loading />;
   }
 
   const updateTaskById = async (id, taskObj) => {
