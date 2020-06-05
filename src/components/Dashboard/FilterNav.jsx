@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-const FilterNav = () => {
+const FilterNav = ({ applyFilters, resetAllFilters }) => {
+  const [searchFilter, setSearchFilter] = useState("");
+
+  const handleClick = () => {
+    if (!searchFilter) {
+      return;
+    }
+    applyFilters({ search: searchFilter });
+  };
+
   return (
     <div className="filternav">
       <div className="filternav__search">
@@ -8,8 +17,15 @@ const FilterNav = () => {
           className="filternav__search__input"
           type="text"
           placeholder="Search"
+          name="searchFilter"
+          value={searchFilter}
+          onChange={(e) => setSearchFilter(e.target.value)}
+          autoComplete="off"
         />
-        <button className="filternav__search__btn btn btn--secondary">
+        <button
+          onClick={handleClick}
+          className="filternav__search__btn btn btn--secondary"
+        >
           Search
         </button>
       </div>
@@ -18,6 +34,12 @@ const FilterNav = () => {
           <option>Ascending</option>
           <option>Descending</option>
         </select>
+        <button
+          onClick={resetAllFilters}
+          className="btn btn--danger btn--danger--small"
+        >
+          Reset Filters
+        </button>
       </div>
     </div>
   );

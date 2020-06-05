@@ -27,7 +27,7 @@
       width: 100%;
       margin: 0 auto;
       justify-content: center;
-      margin-bottom:2rem;
+      margin-bottom: 2rem;
     }
 
     &__input {
@@ -47,6 +47,10 @@
   }
 
   &__sort {
+    &__select {
+      margin-right: 1rem;
+    }
+
     @media only screen and (max-width: $bp-medium) {
       width: 100%;
       text-align: center;

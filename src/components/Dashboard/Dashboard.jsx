@@ -9,14 +9,43 @@ import TaskDashboard from "./TaskDashboard";
 import { taskClient } from "../../apiClients/TaskClient";
 
 const Dashboard = () => {
+  const initialFilterState = {
+    search: "",
+    labels: null,
+    priority: null,
+    status: null,
+  };
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [count, setCount] = useState(0);
 
+  const [filters, setFilters] = useState(initialFilterState);
+
   useEffect(() => {
     getAllTasks();
   }, []);
+
+  const applyFilters = async (filterObj) => {
+    try {
+      setLoading(true);
+      setFilters({ ...filters, ...filterObj });
+      const response = await taskClient.filterTasks(filterObj);
+      setLoading(false);
+      setTasks(response.tasks);
+      console.log(response);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
+  const resetAllFilters = async () => {
+    setLoading(true);
+    setFilters(initialFilterState);
+    await getAllTasks();
+    setLoading(false);
+  };
 
   const getAllTasks = async () => {
     const tasksObj = await taskClient.getTasks();
@@ -35,7 +64,10 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <Navigation isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
-      <FilterNav />
+      <FilterNav
+        resetAllFilters={resetAllFilters}
+        applyFilters={applyFilters}
+      />
       <TaskDashboard isNavOpen={isNavOpen} tasks={tasks} count={count} />
     </div>
   );
