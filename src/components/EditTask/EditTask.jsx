@@ -7,6 +7,7 @@ import { taskClient } from "../../apiClients/TaskClient";
 import EditTaskForm from "./EditTaskForm";
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 import Loading from "../Loading/Loading";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 const EditTask = ({ match, history }) => {
   const [loading, setLoading] = useState(true);
@@ -34,6 +35,10 @@ const EditTask = ({ match, history }) => {
 
   if (loading) {
     return <Loading />;
+  }
+
+  if (!loading && error) {
+    return <NotFoundPage description={error} path="/" linkTitle="Dashboard" />;
   }
 
   const updateTaskById = async (id, taskObj) => {

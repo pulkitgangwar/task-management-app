@@ -6,6 +6,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import AddTask from "./AddTask/AddTask";
 import EditTask from "./EditTask/EditTask";
 import SingleTask from "./SingleTask/SingleTask";
+import NotFoundPage from "./NotFoundPage/NotFoundPage";
 
 const AuthApp = () => {
   return (
@@ -14,7 +15,16 @@ const AuthApp = () => {
       <Route exact path="/addtask" component={AddTask} />
       <Route exact path="/edittask/:id" component={EditTask} />
       <Route exact path="/tasks/:id" component={SingleTask} />
-      <Route exact render={() => <h1>Page Not Found</h1>} />
+      <Route
+        exact
+        render={() => (
+          <NotFoundPage
+            description="404 Page Not Found"
+            path="/"
+            linkTitle="Home"
+          />
+        )}
+      />
     </Switch>
   );
 };
