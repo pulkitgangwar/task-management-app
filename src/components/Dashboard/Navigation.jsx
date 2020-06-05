@@ -5,15 +5,12 @@ import { GiHamburgerMenu } from "react-icons/gi";
 // importing consumer
 import { Auth } from "../../context/Auth.context";
 
-const Navigation = ({ isNavOpen, setIsNavOpen }) => {
+const Navigation = ({ toggleNav, toggleUserProfile }) => {
   const { logout } = useContext(Auth);
   return (
     <nav className="navigation">
       <div className="navigation__heading">
-        <div
-          className="navigation__hamburger-toggle"
-          onClick={() => setIsNavOpen(!isNavOpen)}
-        >
+        <div className="navigation__hamburger-toggle" onClick={toggleNav}>
           <GiHamburgerMenu size="4rem" />
         </div>
         <h2 className="navigation__heading__logo">Logo</h2>
@@ -25,7 +22,10 @@ const Navigation = ({ isNavOpen, setIsNavOpen }) => {
         >
           Logout
         </h3>
-        <div className="navigation__for-user__hamburger"></div>
+        <div
+          className="navigation__for-user__hamburger"
+          onClick={toggleUserProfile}
+        ></div>
       </div>
     </nav>
   );

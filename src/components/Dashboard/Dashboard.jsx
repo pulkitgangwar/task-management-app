@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 import FilterNav from "./FilterNav";
 import TaskDashboard from "./TaskDashboard";
 import Loading from "../Loading/Loading";
+import UserPopup from "./UserPopup";
 
 // importing Client
 import { taskClient } from "../../apiClients/TaskClient";
@@ -17,15 +18,25 @@ const Dashboard = () => {
     status: null,
   };
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [count, setCount] = useState(0);
+  const [userData, setUserData] = useState(null);
 
   const [filters, setFilters] = useState(initialFilterState);
 
   useEffect(() => {
     getAllTasks();
+    getUserData();
   }, []);
+
+  const getUserData = () => {
+    const userDataObj = JSON.parse(
+      atob(JSON.parse(localStorage.getItem("access")).split(".")[1])
+    );
+    setUserData(userDataObj);
+  };
 
   const applyFilters = async (filterObj) => {
     try {
@@ -58,13 +69,22 @@ const Dashboard = () => {
     console.log(tasksObj);
   };
 
+  const toggleUserProfile = () => {
+    setIsUserProfileOpen(!isUserProfileOpen);
+  };
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   if (loading) {
     return <Loading />;
   }
 
   return (
     <div className="dashboard">
-      <Navigation isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+      <UserPopup userData={userData} isUserProfileOpen={isUserProfileOpen} />
+      <Navigation toggleUserProfile={toggleUserProfile} toggleNav={toggleNav} />
       <FilterNav
         resetAllFilters={resetAllFilters}
         applyFilters={applyFilters}
