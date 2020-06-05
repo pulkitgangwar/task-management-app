@@ -68,7 +68,12 @@ const Dashboard = () => {
         resetAllFilters={resetAllFilters}
         applyFilters={applyFilters}
       />
-      <TaskDashboard isNavOpen={isNavOpen} tasks={tasks} count={count} />
+      <TaskDashboard
+        searchFilterValue={filters.search}
+        isNavOpen={isNavOpen}
+        tasks={tasks}
+        count={count}
+      />
     </div>
   );
 };
