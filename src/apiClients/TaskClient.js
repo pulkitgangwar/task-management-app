@@ -53,6 +53,42 @@ class TaskClient {
     });
   }
 
+  // read
+  filterTasks(filterObj) {
+    return new Promise((resolve, reject) => {
+      const questionMark = ["?"];
+      const queryParams = Object.keys(filterObj)
+        .map((filterKey) => {
+          if (filterKey === "labels") {
+            const filterLabel = filterObj[filterKey]
+              .map((singleLabel) => `labels[]=${singleLabel}`)
+              .join("&");
+            return filterLabel;
+          }
+          return `${filterKey}=${filterObj[filterKey]}`;
+        })
+        .join("&");
+
+      const queryString = [...questionMark, queryParams].join("");
+
+      this.instance
+        .get(`/tasks/${queryString}`)
+        .then((response) => resolve(response.data))
+        .catch((err) => {
+          console.log(err.response);
+          if (err.response.data) {
+            if (Array.isArray(err.response.data.message)) {
+              reject(err.response.data.message[0]);
+              return;
+            } else if (err.response.data.message) {
+              reject(err.response.data.message);
+              return;
+            }
+          }
+        });
+    });
+  }
+
   // create
 
   addTask({ title, description, status, label, priority, due_date }) {
