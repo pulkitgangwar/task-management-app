@@ -15,7 +15,7 @@ const Dashboard = () => {
     priority: null,
     status: null,
   };
-  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [count, setCount] = useState(0);
