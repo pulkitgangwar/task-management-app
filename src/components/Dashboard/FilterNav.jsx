@@ -2,12 +2,18 @@ import React, { useState } from "react";
 
 const FilterNav = ({ applyFilters, resetAllFilters }) => {
   const [searchFilter, setSearchFilter] = useState("");
+  const [selectValue, setSelectValue] = useState("");
 
   const handleClick = () => {
     if (!searchFilter) {
       return;
     }
     applyFilters({ search: searchFilter });
+  };
+
+  const handleSelectValueChange = (e) => {
+    setSelectValue(e.target.value);
+    applyFilters({ sortKey: e.target.value });
   };
 
   return (
@@ -30,9 +36,19 @@ const FilterNav = ({ applyFilters, resetAllFilters }) => {
         </button>
       </div>
       <div className="filternav__sort">
-        <select className="filternav__sort__select">
-          <option>Ascending</option>
-          <option>Descending</option>
+        <select
+          className="filternav__sort__select"
+          value={selectValue}
+          onChange={handleSelectValueChange}
+        >
+          <option value="CREATED_AT__ASC">Ascending (Created At)</option>
+          <option value="CREATED_AT__DESC">Descending (Created At)</option>
+          <option value="UPDATED_AT__ASC">Ascending (Updated At)</option>
+          <option value="UPDATED_AT__DESC">Descending (Updated At)</option>
+          <option value="TITLE__ASC">Ascending (Title (A-Z))</option>
+          <option value="TITLE__DESC">Descending (Title (Z-A))</option>
+          <option value="DUE_DATE__ASC">Ascending (Due Date)</option>
+          <option value="DUE_DATE__DESC">Descending (Due Date)</option>
         </select>
         <button
           onClick={resetAllFilters}
