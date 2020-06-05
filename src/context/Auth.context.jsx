@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
       setLoading(true);
       const response = await authClient.login(email, password);
       setLoading(false);
-      setError(false);
+      setError(null);
       localStorage.setItem("access", JSON.stringify(response));
       checkIsLoggedIn();
     } catch (err) {
