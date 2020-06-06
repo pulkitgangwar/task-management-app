@@ -5,7 +5,7 @@ function getToken() {
 
   if (!accessToken) throw new Error("User is not logged in");
 
-  return accessToken;
+  return JSON.parse(accessToken);
 }
 
 const client = async (
