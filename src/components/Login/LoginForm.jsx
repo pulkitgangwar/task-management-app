@@ -1,25 +1,39 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/Auth.context";
+import { login } from "../../api/auth";
 
-// importing Auth Consumer
-import { Auth } from "../../context/Auth.context";
-
-const Form = () => {
-  const { login, loading, error } = useContext(Auth);
+const LoginForm = () => {
+  const { onLogin } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    login(email, password);
+    try {
+      const accessToken = await login(email, password);
+      onLogin(accessToken);
+    } catch (error) {
+      setLoading(false);
+      if (!error.response) {
+        setError(error.message);
+      }
+      if (error.response.status === 401) {
+        setError("Incorrect email or password");
+      }
+      setError(error.response.data.message);
+    }
   };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h1 className="form__heading heading-primary">Login</h1>
 
-      <p className="error">{error && error}</p>
+      {error && <p className="error">{error}</p>}
       <div className="form__div form__div--email">
         <label htmlFor="form__input--email" className="form__label">
           Email
@@ -30,6 +44,7 @@ const Form = () => {
           id="form__input--email"
           name="email"
           value={email}
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
@@ -42,21 +57,24 @@ const Form = () => {
           className="form__input"
           id="form__input--password"
           name="password"
+          minLength={8}
+          maxLength={20}
           value={password}
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
       <div className="form__btn--wrapper">
-        <button className="form__btn btn">
+        <button disabled={loading} className="form__btn btn">
           {loading ? "Loading ..." : "Login"}
         </button>
       </div>
       <p className="form__extra">
-        Don't have a account ? <Link to="/register">register</Link>
+        Don't have a account ? <Link to="/register">Register</Link>
       </p>
     </form>
   );
 };
 
-export default Form;
+export default LoginForm;

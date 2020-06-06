@@ -2,9 +2,9 @@ import React from "react";
 
 // importing Components
 import SideBar from "../SideBar";
-import Form from "./LoginForm";
+import LoginForm from "./LoginForm";
 
-const Login = () => {
+const LoginPage = () => {
   return (
     <div className="login">
       <div className="login__sidebar">
@@ -12,10 +12,10 @@ const Login = () => {
       </div>
 
       <div className="login__form">
-        <Form />
+        <LoginForm />
       </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;
