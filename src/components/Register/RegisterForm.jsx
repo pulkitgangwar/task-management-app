@@ -1,28 +1,48 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import swal from "@sweetalert/with-react";
+import { register } from "../../api/auth";
 
-// importing Auth Context Consumer
-import { Auth } from "../../context/Auth.context";
+const RegisterForm = () => {
+  const history = useHistory();
 
-const Form = () => {
-  const { register, loading, error } = useContext(Auth);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    register(name, email, password);
-
-    // console.log(name, email, password);
+    try {
+      await register(name, email, password);
+      setLoading(false);
+      setError(null);
+      swal({
+        title: "Account Created!",
+        text: "Your account has been created successfully. You can login now",
+        icon: "success",
+        button: "Go to Login",
+      }).then(() => history.push("/login"));
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      if (!error.response) {
+        setError(error.message);
+      }
+      Array.isArray(error.response.data.message)
+        ? setError(error.response.data.message.join("\n"))
+        : setError(error.response.data.message);
+    }
   };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h1 className="form__heading heading-primary">Register</h1>
 
-      <p className="error">{error && error}</p>
+      {error && <p className="error">{error}</p>}
 
       <div className="form__div form__div--name">
         <label htmlFor="form__input--name" className="form__label">
@@ -33,9 +53,10 @@ const Form = () => {
           className="form__input"
           id="form__input--name"
           name="name"
+          maxLength={32}
+          required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          autoComplete="off"
         />
       </div>
       <div className="form__div form__div--email">
@@ -47,9 +68,9 @@ const Form = () => {
           className="form__input"
           id="form__input--email"
           name="email"
+          required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          autoComplete="off"
         />
       </div>
       <div className="form__div form__div--password">
@@ -61,22 +82,24 @@ const Form = () => {
           className="form__input"
           id="form__input--password"
           name="password"
+          minLength={8}
+          maxLength={20}
+          required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoComplete="off"
         />
       </div>
 
       <div className="form__btn--wrapper">
-        <button className="form__btn btn">
+        <button disabled={loading} className="form__btn btn">
           {loading ? "Loading ..." : "Register"}
         </button>
       </div>
       <p className="form__extra">
-        Already a member ? <Link to="/">login</Link>
+        Already a user ? <Link to="/">Login</Link>
       </p>
     </form>
   );
 };
 
-export default Form;
+export default RegisterForm;

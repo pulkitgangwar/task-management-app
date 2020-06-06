@@ -1,10 +1,8 @@
 import React from "react";
-
-// importing Components
 import SideBar from "../SideBar";
-import Form from "./RegisterForm";
+import RegisterForm from "./RegisterForm";
 
-const Register = () => {
+const RegisterPage = () => {
   return (
     <div className="register">
       <div className="register__sidebar">
@@ -12,10 +10,10 @@ const Register = () => {
       </div>
 
       <div className="register__form">
-        <Form />
+        <RegisterForm />
       </div>
     </div>
   );
 };
 
-export default Register;
+export default RegisterPage;
