@@ -1,81 +1,56 @@
 import React, { useState, useEffect, useRef } from "react";
-
-// importing Components
+import swal from "@sweetalert/with-react";
+import { getTasks } from "../../api/task";
+import Loading from "../Loading/Loading";
 import Navigation from "./Navigation";
 import FilterNav from "./FilterNav";
 import TaskDashboard from "./TaskDashboard";
-import Loading from "../Loading/Loading";
 import UserPopup from "./UserPopup";
-
-// importing Client
-import { taskClient } from "../../apiClients/TaskClient";
+import FilterSidebar from "./FilterSidebar";
+import initialFilterState from "./initialFilterState";
 
 const Dashboard = () => {
-  const initialFilterState = {
-    search: "",
-    labels: null,
-    priority: null,
-    status: null,
-  };
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(
+    Boolean(window.innerWidth > 1000)
+  );
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [tasks, setTasks] = useState(null);
-  const [count, setCount] = useState(0);
-  const [userData, setUserData] = useState(null);
+  const [data, setData] = useState(null);
+  const [filters, setFilters] = useState(initialFilterState);
   const dashboardRef = useRef();
 
-  const [filters, setFilters] = useState(initialFilterState);
+  const count = data?.count;
+  const tasks = data?.tasks;
 
   useEffect(() => {
-    getAllTasks();
-    getUserData();
-  }, []);
-
-  const getUserData = () => {
-    const userDataObj = JSON.parse(
-      atob(JSON.parse(localStorage.getItem("access")).split(".")[1])
-    );
-    setUserData(userDataObj);
-  };
-
-  const applyFilters = async (filterObj) => {
-    try {
+    const fetchTasks = async () => {
       setLoading(true);
-      setFilters({ ...filters, ...filterObj });
-      const response = await taskClient.filterTasks(filterObj);
-      setLoading(false);
-      setTasks(response.tasks);
-      console.log(response);
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-    }
-  };
+      try {
+        const response = await getTasks(filters);
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        swal({
+          title: "Unable to fetch Tasks!",
+          text: error.response ? error.response.data.message : error.message,
+          icon: "error",
+        });
+      }
+    };
+    fetchTasks();
+  }, [filters]);
 
   const resetAllFilters = async () => {
-    setLoading(true);
     setFilters(initialFilterState);
-    await getAllTasks();
-    setLoading(false);
-  };
-
-  const getAllTasks = async () => {
-    const tasksObj = await taskClient.getTasks();
-
-    setTasks(tasksObj.tasks);
-    setCount(tasksObj.count);
-    setLoading(false);
-
-    console.log(tasksObj);
   };
 
   const toggleUserProfile = () => {
     setIsUserProfileOpen(!isUserProfileOpen);
   };
 
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
+  const toggleFilterSidebar = () => {
+    setIsFilterSidebarOpen(!isFilterSidebarOpen);
   };
 
   const closeUserProfile = () => {
@@ -86,24 +61,41 @@ const Dashboard = () => {
     setIsUserProfileOpen(false);
   };
 
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <div ref={dashboardRef} onClick={closeUserProfile} className="dashboard">
-      <UserPopup userData={userData} isUserProfileOpen={isUserProfileOpen} />
-      <Navigation toggleUserProfile={toggleUserProfile} toggleNav={toggleNav} />
+      <UserPopup isUserProfileOpen={isUserProfileOpen} />
+      <Navigation toggleUserProfile={toggleUserProfile} />
       <FilterNav
+        filters={filters}
+        toggleFilterSidebar={toggleFilterSidebar}
+        setFilters={setFilters}
         resetAllFilters={resetAllFilters}
-        applyFilters={applyFilters}
       />
-      <TaskDashboard
-        searchFilterValue={filters.search}
-        isNavOpen={isNavOpen}
-        tasks={tasks}
-        count={count}
-      />
+      <div className="taskdashboard">
+        <div
+          className={`taskdashboard__sidenavigation ${
+            isFilterSidebarOpen
+              ? ""
+              : "taskdashboard__sidenavigation__navigation-off"
+          }`}
+        >
+          <FilterSidebar
+            isOpen={isFilterSidebarOpen}
+            filters={filters}
+            setFilters={setFilters}
+          />
+        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <TaskDashboard
+            searchFilterValue={filters.search}
+            isFilterSidebarOpen={isFilterSidebarOpen}
+            tasks={tasks}
+            count={count}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -1,23 +1,33 @@
 import React, { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 
-const FilterNav = ({ applyFilters, resetAllFilters }) => {
+const FilterNav = ({
+  filters,
+  setFilters,
+  resetAllFilters,
+  toggleFilterSidebar,
+}) => {
   const [searchFilter, setSearchFilter] = useState("");
-  const [selectValue, setSelectValue] = useState("");
 
   const handleClick = () => {
     if (!searchFilter) {
       return;
     }
-    applyFilters({ search: searchFilter });
+    setFilters({ ...filters, search: searchFilter });
   };
 
   const handleSelectValueChange = (e) => {
-    setSelectValue(e.target.value);
-    applyFilters({ sortKey: e.target.value });
+    setFilters({ ...filters, sortKey: e.target.value });
   };
 
   return (
     <div className="filternav">
+      <div
+        className="filternav__hamburger-toggle"
+        onClick={toggleFilterSidebar}
+      >
+        <GiHamburgerMenu size="4rem" />
+      </div>
       <div className="filternav__search">
         <input
           className="filternav__search__input"
@@ -38,7 +48,7 @@ const FilterNav = ({ applyFilters, resetAllFilters }) => {
       <div className="filternav__sort">
         <select
           className="filternav__sort__select"
-          value={selectValue}
+          value={filters.sortKey}
           onChange={handleSelectValueChange}
         >
           <option value="CREATED_AT__ASC">Ascending (Created At)</option>
