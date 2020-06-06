@@ -7,7 +7,7 @@ class TaskClient {
     });
   }
 
-  instanciatingAxios() {
+  instantiatingAxios() {
     this.instance.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${JSON.parse(localStorage.getItem("access"))}`;
