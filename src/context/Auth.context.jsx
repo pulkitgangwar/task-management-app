@@ -1,82 +1,44 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-// importing AuthClient
-import AuthClient from "../apiClients/AuthClient";
+export const AuthContext = createContext();
 
-export const Auth = createContext();
-
-const AuthProvider = ({ children }) => {
-  const authClient = new AuthClient();
-
-  useEffect(() => {
-    checkIsLoggedIn();
-  }, []);
-
+const AuthProvider = (props) => {
+  const history = useHistory();
   const [isLoggedIn, setIsLoggedIn] = useState(
-    JSON.parse(localStorage.getItem("access")) || null
+    JSON.parse(localStorage.getItem("access")) ? true : false
   );
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const { push } = useHistory();
-
-  const checkIsLoggedIn = () => {
+  useEffect(() => {
     if (localStorage.getItem("access")) {
-      setIsLoggedIn(JSON.parse(localStorage.getItem("access")));
+      setIsLoggedIn(true);
       return;
     }
+    setIsLoggedIn(false);
+  }, []);
 
-    setIsLoggedIn(null);
-  };
-
-  const register = async (name, email, password) => {
-    try {
-      console.log(name, email, password);
-      setLoading(true);
-      await authClient.register(name, email, password);
-      setLoading(false);
-      setError(null);
-      console.log("near push");
-      push("/");
-    } catch (err) {
-      console.log("catch block ran");
-      console.log(err);
-      setError(err);
-      setLoading(false);
-      console.log("catch ran");
-      console.log(err);
-    }
-  };
-
-  const login = async (email, password) => {
-    try {
-      setLoading(true);
-      const response = await authClient.login(email, password);
-      setLoading(false);
-      setError(null);
-      localStorage.setItem("access", JSON.stringify(response));
-      checkIsLoggedIn();
-    } catch (err) {
-      checkIsLoggedIn();
-      setError(err);
-      setLoading(false);
-      console.log(err);
-    }
+  const onLogin = (accessToken) => {
+    localStorage.setItem("access", JSON.stringify(accessToken));
+    setIsLoggedIn(true);
+    history.push("/");
   };
 
   const logout = () => {
     localStorage.clear();
-    checkIsLoggedIn();
+    setIsLoggedIn(false);
   };
 
   return (
-    <Auth.Provider
-      value={{ isLoggedIn, login, logout, register, loading, error }}
-    >
-      {children}
-    </Auth.Provider>
+    <AuthContext.Provider value={{ isLoggedIn, onLogin, logout }} {...props} />
   );
 };
+
+export function useAuth() {
+  const context = React.useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error(`useAuth must be used within a AuthProvider`);
+  }
+  return context;
+}
 
 export default AuthProvider;

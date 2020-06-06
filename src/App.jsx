@@ -5,12 +5,14 @@ import UnAuthApp from "./components/UnAuthApp";
 import AuthApp from "./components/AuthApp";
 
 // importing context consumer
-import { Auth } from "./context/Auth.context";
+import { AuthContext } from "./context/Auth.context";
 
 const App = () => {
-  const { isLoggedIn } = useContext(Auth);
+  const { isLoggedIn } = useContext(AuthContext);
 
-  return <>{isLoggedIn ? <AuthApp /> : <UnAuthApp />}</>;
+  if (isLoggedIn) return <AuthApp />;
+
+  return <UnAuthApp />;
 };
 
 export default App;
