@@ -20,13 +20,14 @@ const RegisterForm = () => {
       await register(name, email, password);
       setLoading(false);
       setError(null);
-      swal({
+      await swal({
         title: "Account Created!",
         text: "Your account has been created successfully. You can login now",
         icon: "success",
         button: "Go to Login",
-      }).then(() => history.push("/login"));
-      setLoading(false);
+        className: "btn btn--success",
+      });
+      history.push("/login");
     } catch (error) {
       setLoading(false);
       if (!error.response) {
