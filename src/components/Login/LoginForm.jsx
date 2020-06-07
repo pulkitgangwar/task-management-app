@@ -21,11 +21,11 @@ const LoginForm = () => {
       setLoading(false);
       if (!error.response) {
         setError(error.message);
-      }
-      if (error.response.status === 401) {
+      } else if (error.response.status === 401) {
         setError("Incorrect email or password");
+      } else {
+        setError(error.response.data.message);
       }
-      setError(error.response.data.message);
     }
   };
 

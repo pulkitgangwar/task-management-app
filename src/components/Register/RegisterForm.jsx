@@ -32,10 +32,11 @@ const RegisterForm = () => {
       setLoading(false);
       if (!error.response) {
         setError(error.message);
+      } else {
+        Array.isArray(error.response.data.message)
+          ? setError(error.response.data.message.join("\n"))
+          : setError(error.response.data.message);
       }
-      Array.isArray(error.response.data.message)
-        ? setError(error.response.data.message.join("\n"))
-        : setError(error.response.data.message);
     }
   };
 
