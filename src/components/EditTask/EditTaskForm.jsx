@@ -1,50 +1,60 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-// import { Link } from "react-router-dom";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import { Link } from "react-router-dom";
+import { updateTaskById } from "../../api/task";
 
-// importing stylesheet
-import "react-datepicker/dist/react-datepicker.css";
-
-const Form = ({ task, updateTaskById, error }) => {
+const EditTaskForm = ({ task }) => {
   const [selectedDateAndTime, setSelectedDateAndTime] = useState(
     task.due_date ? new Date(task.due_date) : null
   );
-  const [isoTime, setIsoTime] = useState(null);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(
-    task.description ? task.description : ""
+    EditorState.createWithContent(convertFromRaw(JSON.parse(task.description)))
   );
   const [status, setStatus] = useState(task.status);
   const [label, setLabel] = useState(task.label);
   const [priority, setPriority] = useState(task.priority);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log({
-      title: title,
-      description: description,
-      label: label,
-      status: status,
-      priority: priority,
-      due_date: isoTime,
-    });
-
-    updateTaskById(task.id, {
-      title: title,
-      description: description,
-      label: label,
-      status: status,
-      priority: priority,
-      due_date: isoTime,
-    });
+    try {
+      setLoading(true);
+      await updateTaskById(task.id, {
+        title,
+        description: JSON.stringify(
+          convertToRaw(description.getCurrentContent())
+        ),
+        status,
+        label,
+        priority,
+        due_date: selectedDateAndTime
+          ? new Date(selectedDateAndTime).toISOString()
+          : null,
+      });
+      setLoading(false);
+      setError(null);
+      setSuccess(true);
+    } catch (error) {
+      setLoading(false);
+      setSuccess(false);
+      setError(error.response ? error.response.data.message : error.message);
+    }
   };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <h1 className="form__heading heading-primary">Edit Task</h1>
-
-      <p className="error">{error && error}</p>
+      <h1 className="form__heading heading-primary">Update Task</h1>
+      {success && (
+        <p className="success">
+          Task Updated Successfully ! <Link to="/">Go to All Tasks</Link>
+        </p>
+      )}
+      {error && <p className="error">{error}</p>}
 
       <div className="form__div form__div--title">
         <label htmlFor="form__input--title" className="form__label">
@@ -56,25 +66,11 @@ const Form = ({ task, updateTaskById, error }) => {
           id="form__input--title"
           name="title"
           onChange={(e) => setTitle(e.target.value)}
+          maxLength={32}
+          required
           value={title}
-          autoComplete="off"
         />
       </div>
-      <div className="form__div form__div--description">
-        <label htmlFor="form__input--description" className="form__label">
-          Description (optional)
-        </label>
-        <textarea
-          type="text"
-          className="form__input form__textarea"
-          id="form__input--description"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-          autoComplete="off"
-        />
-      </div>
-
       <div className="form__container">
         <div className="form__div form__div--status">
           <label htmlFor="form__input--status" className="form__label">
@@ -84,6 +80,7 @@ const Form = ({ task, updateTaskById, error }) => {
             id="form__input--status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
+            required
           >
             <option value="PENDING">Pending</option>
             <option value="IN_PROGRESS">In Progress</option>
@@ -98,6 +95,7 @@ const Form = ({ task, updateTaskById, error }) => {
             id="form__input--label"
             value={label}
             onChange={(e) => setLabel(e.target.value)}
+            required
           >
             <option value="PERSONAL">Personal</option>
             <option value="WORK">Work</option>
@@ -108,7 +106,6 @@ const Form = ({ task, updateTaskById, error }) => {
             <option value="OTHER">Other</option>
           </select>
         </div>
-
         <div className="form__div form__div--priority">
           <label htmlFor="form__input--priority" className="form__label">
             Priority
@@ -117,6 +114,7 @@ const Form = ({ task, updateTaskById, error }) => {
             id="form__input--priority"
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
+            required
           >
             <option value="LOW">Low</option>
             <option value="NORMAL">Normal</option>
@@ -124,40 +122,62 @@ const Form = ({ task, updateTaskById, error }) => {
           </select>
         </div>
       </div>
-
+      <div className="form__div form__div--description">
+        <label htmlFor="form__input--description" className="form__label">
+          Description
+        </label>
+        <Editor
+          id="form__input--description"
+          name="description"
+          editorState={description}
+          toolbar={{
+            options: [
+              "inline",
+              "blockType",
+              "list",
+              "textAlign",
+              "link",
+              "embedded",
+              "emoji",
+              "history",
+            ],
+          }}
+          wrapperClassName="form__input form__textarea"
+          toolbarClassName="form__input form__toolbar"
+          editorClassName="form__input form__editor"
+          onEditorStateChange={(editorState) => setDescription(editorState)}
+        />
+      </div>
       <div className="form__div form__div--date-picker">
         <label htmlFor="form__input--date-picker" className="form__label">
-          Deadline for Task (optional)
+          Deadline{" "}
+          <button
+            className="btn btn--danger btn--danger--small"
+            type="button"
+            onClick={(e) => setSelectedDateAndTime(null)}
+          >
+            Clear
+          </button>
         </label>
-
         <DatePicker
-          autoComplete="off"
+          id="form__input--date-picker"
           selected={selectedDateAndTime}
           showTimeSelect
           dateFormat="Pp"
           onChange={(e) => {
-            setIsoTime(e.toISOString());
             setSelectedDateAndTime(e);
           }}
           className="form__date-picker"
           minDate={new Date()}
-          id="form__input--date-picker"
         />
-        <div>
-          <span
-            className="btn btn--danger btn--danger--small"
-            onClick={(e) => setSelectedDateAndTime(null)}
-          >
-            Remove Deadline
-          </span>
-        </div>
       </div>
-
       <div className="form__btn--wrapper">
-        <button className="form__btn btn">Edit Task</button>
+        <button disabled={loading} className="form__btn btn">
+          {loading ? "Processing..." : "Update Task"}
+        </button>
       </div>
     </form>
   );
 };
 
-export default Form;
+export default EditTaskForm;
