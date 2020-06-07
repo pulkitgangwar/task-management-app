@@ -14,10 +14,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
     if (filters.status === status) {
       setFilters({
         ...filters,
+        offset: 0,
         status: null,
       });
     } else {
-      setFilters({ ...filters, status });
+      setFilters({ ...filters, offset: 0, status });
     }
   };
 
@@ -25,10 +26,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
     if (filters.priority === priority) {
       setFilters({
         ...filters,
+        offset: 0,
         priority: null,
       });
     } else {
-      setFilters({ ...filters, priority });
+      setFilters({ ...filters, offset: 0, priority });
     }
   };
 
@@ -37,10 +39,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
     if (currentLabels.includes(label)) {
       setFilters({
         ...filters,
+        offset: 0,
         labels: currentLabels.filter((l) => l !== label),
       });
     } else {
-      setFilters({ ...filters, labels: [...currentLabels, label] });
+      setFilters({ ...filters, offset: 0, labels: [...currentLabels, label] });
     }
   };
 
@@ -166,7 +169,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                     className="btn btn--danger btn--danger--small"
                     type="button"
                     onClick={(e) =>
-                      setFilters({ ...filters, after_due_date: null })
+                      setFilters({
+                        ...filters,
+                        offset: 0,
+                        after_due_date: null,
+                      })
                     }
                   >
                     Clear
@@ -180,6 +187,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   onChange={(date) => {
                     setFilters({
                       ...filters,
+                      offset: 0,
                       after_due_date: date,
                     });
                   }}
@@ -193,7 +201,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                     className="btn btn--danger btn--danger--small"
                     type="button"
                     onClick={(e) =>
-                      setFilters({ ...filters, before_due_date: null })
+                      setFilters({
+                        ...filters,
+                        offset: 0,
+                        before_due_date: null,
+                      })
                     }
                   >
                     Clear
@@ -207,6 +219,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   onChange={(date) => {
                     setFilters({
                       ...filters,
+                      offset: 0,
                       before_due_date: date,
                     });
                   }}
@@ -235,7 +248,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                     className="btn btn--danger btn--danger--small"
                     type="button"
                     onClick={(e) =>
-                      setFilters({ ...filters, after_created_at: null })
+                      setFilters({
+                        ...filters,
+                        offset: 0,
+                        after_created_at: null,
+                      })
                     }
                   >
                     Clear
@@ -249,6 +266,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   onChange={(date) => {
                     setFilters({
                       ...filters,
+                      offset: 0,
                       after_created_at: date,
                     });
                   }}
@@ -262,7 +280,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                     className="btn btn--danger btn--danger--small"
                     type="button"
                     onClick={(e) =>
-                      setFilters({ ...filters, before_created_at: null })
+                      setFilters({
+                        ...filters,
+                        offset: 0,
+                        before_created_at: null,
+                      })
                     }
                   >
                     Clear
@@ -276,6 +298,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   onChange={(date) => {
                     setFilters({
                       ...filters,
+                      offset: 0,
                       before_created_at: date,
                     });
                   }}

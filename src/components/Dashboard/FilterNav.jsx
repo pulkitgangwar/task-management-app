@@ -13,11 +13,11 @@ const FilterNav = ({
     if (!searchFilter) {
       return;
     }
-    setFilters({ ...filters, search: searchFilter });
+    setFilters({ ...filters, offset: 0, search: searchFilter });
   };
 
   const handleSelectValueChange = (e) => {
-    setFilters({ ...filters, sortKey: e.target.value });
+    setFilters({ ...filters, offset: 0, sortKey: e.target.value });
   };
 
   return (
