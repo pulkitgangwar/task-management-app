@@ -1,0 +1,16 @@
+.pagination {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  button:disabled {
+    background-color: $color-grey;
+  }
+
+  button {
+    padding: 1rem;
+    min-width: 100px;
+    background-color: $primary-color-light;
+  }
+}

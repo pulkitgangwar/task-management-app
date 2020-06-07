@@ -12,14 +12,14 @@ const Pagination = ({
   return (
     <div className="pagination">
       <button
-        className="pagination__prev"
+        className="btn pagination__prev"
         disabled={!hasPrevPage}
         onClick={() => goToPrevPage()}
       >
         Previous
       </button>
       <button
-        className="pagination__next"
+        className="btn pagination__next"
         disabled={!hasNextPage}
         onClick={() => goToNextPage()}
       >
