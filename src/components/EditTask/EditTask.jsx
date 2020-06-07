@@ -4,7 +4,6 @@ import useFetch from "../../hooks/useFetch";
 import swal from "@sweetalert/with-react";
 import { deleteTaskById } from "../../api/task";
 import EditTaskForm from "./EditTaskForm";
-import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 import Loading from "../Loading/Loading";
 
 /**
@@ -67,7 +66,7 @@ const EditTask = ({ history, match }) => {
 
   return (
     <div className="edittask">
-      <FloatingAnchor path={`/tasks/${id}`} title="Go back" />
+      
       <div className="singletask__cta-btns">
         <Link className="btn singletask__cta-btns__edit" to={`/tasks/${id}`}>
           View Task

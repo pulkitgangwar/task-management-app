@@ -53,6 +53,7 @@ const UserPopup = ({ isUserProfileOpen }) => {
           <img
             src={`https://gravatar.com/avatar/${md5(userData.email)}?s=128`}
             alt="User Avatar"
+            className="userpopup__details__avatar__image"
           />
         </div>
         <h3 className="userpopup__details__name">

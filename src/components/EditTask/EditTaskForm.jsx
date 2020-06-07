@@ -54,7 +54,7 @@ const EditTaskForm = ({ task }) => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <h1 className="form__heading heading-primary">Update Task</h1>
+      <h1 className="form__heading heading-primary form__heading--custom">Update Task</h1>
       {success && (
         <p className="success">
           Task Updated Successfully ! <Link to="/">Go to All Tasks</Link>

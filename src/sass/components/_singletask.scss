@@ -62,8 +62,12 @@
 
   &__cta-btns {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: -4rem;
+    right: 1rem;
+
+    @media only screen and (max-width:$bp-medium){
+      top:-6rem;
+    }
 
     &__edit {
       margin-right: 1rem;

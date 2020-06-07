@@ -30,7 +30,7 @@ const FilterNav = ({
           className="filternav__hamburger-toggle"
           onClick={toggleFilterSidebar}
         >
-          <GiHamburgerMenu size="4rem" />
+          <GiHamburgerMenu size="4rem" className="filternav__hamburger-toggle__ham" />
         </div>
         <div className="filternav__search">
           <input
