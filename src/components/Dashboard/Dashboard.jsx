@@ -1,26 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "@sweetalert/with-react";
 import { getTasks } from "../../api/task";
 import Loading from "../Loading/Loading";
-import Navigation from "./Navigation";
 import FilterNav from "./FilterNav";
 import TaskDashboard from "./TaskDashboard";
-import UserPopup from "./UserPopup";
 import FilterSidebar from "./FilterSidebar";
+import Pagination from "./Pagination";
 import initialFilterState from "./initialFilterState";
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(
     Boolean(window.innerWidth > 1000)
   );
-  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [filters, setFilters] = useState(initialFilterState);
-  const dashboardRef = useRef();
 
-  const count = data?.count;
   const tasks = data?.tasks;
+  const count = data?.count;
+  const hasPrevPage = filters.offset > 0;
+  const hasNextPage =
+    Math.ceil(count / filters.limit) >
+    Math.ceil(filters.limit * filters.offset) + 1;
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -45,26 +46,20 @@ const Dashboard = () => {
     setFilters(initialFilterState);
   };
 
-  const toggleUserProfile = () => {
-    setIsUserProfileOpen(!isUserProfileOpen);
-  };
-
   const toggleFilterSidebar = () => {
     setIsFilterSidebarOpen(!isFilterSidebarOpen);
   };
 
-  const closeUserProfile = () => {
-    if (!isUserProfileOpen) {
-      return;
-    }
+  const goToNextPage = () => {
+    setFilters({ ...filters, offset: filters.offset + filters.limit });
+  };
 
-    setIsUserProfileOpen(false);
+  const goToPrevPage = () => {
+    setFilters({ ...filters, offset: filters.offset - filters.limit });
   };
 
   return (
-    <div ref={dashboardRef} onClick={closeUserProfile} className="dashboard">
-      <UserPopup isUserProfileOpen={isUserProfileOpen} />
-      <Navigation toggleUserProfile={toggleUserProfile} />
+    <>
       <FilterNav
         filters={filters}
         toggleFilterSidebar={toggleFilterSidebar}
@@ -85,18 +80,46 @@ const Dashboard = () => {
             setFilters={setFilters}
           />
         </div>
-        {loading ? (
-          <Loading />
-        ) : (
-          <TaskDashboard
-            searchFilterValue={filters.search}
-            isFilterSidebarOpen={isFilterSidebarOpen}
-            tasks={tasks}
-            count={count}
-          />
-        )}
+        <div
+          className={`taskdashboard__wrapper ${
+            isFilterSidebarOpen ? "" : "taskdashboard__wrapper__navigation-off"
+          }`}
+        >
+          <div className="spacer"></div>
+          <div className="taskdashboard__header">
+            <h3 className="heading-tertiary heading-tertiary--small taskdashboard__task-count">
+              Total Tasks : {count}
+            </h3>
+            <div className="taskdashboard__btn--wrapper">
+              <button
+                className="btn taskdashboard__btn"
+                onClick={() => history.push("/new")}
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <TaskDashboard
+                searchFilterValue={filters.search}
+                isFilterSidebarOpen={isFilterSidebarOpen}
+                tasks={tasks}
+                count={count}
+              />
+              <Pagination
+                hasPrevPage={hasPrevPage}
+                hasNextPage={hasNextPage}
+                goToPrevPage={goToPrevPage}
+                goToNextPage={goToNextPage}
+              ></Pagination>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

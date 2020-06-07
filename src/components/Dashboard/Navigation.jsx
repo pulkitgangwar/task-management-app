@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 
 const Navigation = ({ toggleUserProfile }) => {
   return (
     <nav className="navigation">
       <div className="navigation__heading">
-        <h2 className="navigation__heading__logo">Logo</h2>
+        <Link className="navigation__heading__logo" to="/">
+          <h2>TASK APP</h2>
+        </Link>
       </div>
       <div className="navigation__for-user">
         <FaUserCircle
