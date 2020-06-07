@@ -8,7 +8,7 @@ const SideBar = () => {
   return (
     <div className="sidebar">
       <Link className="sidebar__logo" to="/">
-        <h2>TASK APP</h2>
+        <img src="/images/logo-white.svg" alt="Logo" width="100px" />
       </Link>
       <div className="sidebar__image">
         <img

@@ -10,7 +10,7 @@ const Navigation = ({ toggleUserProfile }) => {
     <nav className="navigation">
       <div className="navigation__heading">
         <Link className="navigation__heading__logo" to="/">
-          <h2>TASK APP</h2>
+          <img src="/images/logo-white.svg" alt="Logo" width="50px" />
         </Link>
       </div>
       <div className="navigation__for-user">
