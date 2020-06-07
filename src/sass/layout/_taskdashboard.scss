@@ -39,10 +39,10 @@
     }
   }
 
-  &__placeholder{
-    color:$color-grey-dark;
-    width:100%;
-    height:42vh;
+  &__placeholder {
+    color: $color-grey-dark;
+    width: 100%;
+    height: 42vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,13 +60,17 @@
   &__task {
     padding: 2rem;
   }
+
+  &__task-count {
+    color: $color-grey-dark1;
+  }
 }
 
 .spacer {
   width: 100%;
   height: 20vh;
 
-  @media only screen and (max-width: $bp-medium) {
+  @media only screen and (max-width: $bp-large) {
     flex-direction: column;
     height: 25vh;
   }

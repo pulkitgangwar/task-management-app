@@ -10,11 +10,19 @@ const Pagination = ({
   goToNextPage,
 }) => {
   return (
-    <div>
-      <button disabled={!hasPrevPage} onClick={() => goToPrevPage()}>
+    <div className="pagination">
+      <button
+        className="pagination__prev"
+        disabled={!hasPrevPage}
+        onClick={() => goToPrevPage()}
+      >
         Previous
       </button>
-      <button disabled={!hasNextPage} onClick={() => goToNextPage()}>
+      <button
+        className="pagination__next"
+        disabled={!hasNextPage}
+        onClick={() => goToNextPage()}
+      >
         Next
       </button>
     </div>

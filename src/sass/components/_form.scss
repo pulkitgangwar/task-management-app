@@ -14,6 +14,16 @@
   &__heading {
     margin-bottom: 5rem;
     font-size: 6rem;
+
+    @media only screen and (max-width: $bp-largest) {
+      font-size: 5rem;
+    }
+    @media only screen and (max-width: $bp-large) {
+      font-size: 4rem;
+    }
+    @media only screen and (max-width: $bp-medium) {
+      font-size: 3rem;
+    }
   }
 
   &__div {
@@ -28,15 +38,39 @@
   &__label {
     font-size: 1.8rem;
     font-weight: 600;
+    color: $color-grey-dark1;
+
+    &--wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   &__input {
-    background-color: $color-grey;
+    background-color: $color-grey-light;
     border: none;
     margin-bottom: 2rem;
     font-size: 1.8rem;
     padding: 1rem;
     font-family: inherit;
+
+    &__status,
+    &__label,
+    &__priority {
+      width: 100%;
+      font-family: inherit;
+    }
+
+    &__deadline-clean {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: $color-danger;
+      &::selection {
+        color: $color-grey-dark1;
+      }
+    }
   }
 
   &__btn--wrapper {
@@ -48,6 +82,10 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
+
+    @media only screen and (max-width: $bp-medium) {
+      flex-direction: column;
+    }
   }
 
   &__textarea {

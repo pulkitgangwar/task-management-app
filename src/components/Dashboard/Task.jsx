@@ -15,7 +15,14 @@ const Task = ({ task }) => {
         <h3 className="heading-tertiary task__title-and-priority__title">
           {title}
         </h3>
-        <div className="task__title-and-priority__priority">{priority}</div>
+        <div className="task__title-and-priority__priority">
+          <span
+            className={`task__title-and-priority__priority__color task__title-and-priority__priority__color--${priority}`}
+          />
+          <p className="task__title-and-priority__priority__label">
+            {priority.toLowerCase()} priority
+          </p>
+        </div>
       </div>
       <div className="task__status-date-and-label-icon">
         <p className="paragraph-secondary paragraph-secondary--bold task__status-date-and-label-icon__status">
@@ -29,7 +36,7 @@ const Task = ({ task }) => {
             : ""}
         </p>
         <div className="task__status-date-and-label-icon__label-icon">
-          {label}
+          {label.toLowerCase()}
         </div>
       </div>
     </div>

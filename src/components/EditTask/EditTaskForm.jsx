@@ -84,6 +84,7 @@ const EditTaskForm = ({ task }) => {
           </label>
           <select
             id="form__input--status"
+            className="form__input__status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             required
@@ -99,6 +100,7 @@ const EditTaskForm = ({ task }) => {
           </label>
           <select
             id="form__input--label"
+            className="form__input__label"
             value={label}
             onChange={(e) => setLabel(e.target.value)}
             required
@@ -118,6 +120,7 @@ const EditTaskForm = ({ task }) => {
           </label>
           <select
             id="form__input--priority"
+            className="form__input__priority"
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
             required
@@ -155,16 +158,18 @@ const EditTaskForm = ({ task }) => {
         />
       </div>
       <div className="form__div form__div--date-picker">
-        <label htmlFor="form__input--date-picker" className="form__label">
-          Deadline{" "}
+        <div className="form__label--wrapper">
+          <label htmlFor="form__input--date-picker" className="form__label">
+            Deadline{" "}
+          </label>
           <button
-            className="btn btn--danger btn--danger--small"
+            className="form__input__deadline-clean"
             type="button"
             onClick={(e) => setSelectedDateAndTime(null)}
           >
             Clear
           </button>
-        </label>
+        </div>
         <DatePicker
           id="form__input--date-picker"
           selected={selectedDateAndTime}
@@ -175,6 +180,7 @@ const EditTaskForm = ({ task }) => {
           }}
           className="form__date-picker"
           minDate={new Date()}
+          autoComplete="off"
         />
       </div>
       <div className="form__btn--wrapper">

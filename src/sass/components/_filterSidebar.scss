@@ -17,7 +17,7 @@
     width: 35%;
   }
 
-  @media only screen and (max-width: $bp-medium) {
+  @media only screen and (max-width: $bp-large) {
     transition: all 0.1s ease-in-out;
     top: 25vh;
 
@@ -29,7 +29,7 @@
   }
 
   &__content {
-    background-color: $primary-color;
+    background-color: $color-grey-light;
     height: 1200px;
     &__navigation-off {
       visibility: none;
@@ -47,7 +47,7 @@
   }
 
   &__li {
-    background-color: $color-grey-dark;
+    background-color: $color-grey-light1;
     color: black;
     &--wrapper {
       padding: 1rem;
@@ -56,7 +56,7 @@
 
   &__drop {
     width: 100%;
-    border-bottom: 1px solid black;
+    // border-bottom: 1px solid black;
     cursor: pointer;
 
     &__title {
@@ -82,7 +82,7 @@
     &__li {
       width: 100%;
       padding: 2rem;
-      background-color: $color-grey-light;
+      background-color: $color-grey-light1;
       // border: 1px solid black;
 
       &--active {

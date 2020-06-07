@@ -11,49 +11,95 @@
   top: 10vh;
   z-index: 10;
 
-  @media only screen and (max-width: $bp-medium) {
+  @media only screen and (max-width: $bp-large) {
     flex-direction: column;
     padding: 0;
     justify-content: center;
     height: 15vh;
   }
 
-  &__search {
+  &__ham-and-search {
+    display: flex;
     width: 50%;
+
+    @media only screen and (max-width: $bp-large) {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+    }
+  }
+
+  &__search {
+    width: 100%;
     display: flex;
     align-items: center;
 
-    @media only screen and (max-width: $bp-medium) {
-      width: 100%;
-      margin: 0 auto;
+    @media only screen and (max-width: $bp-large) {
+      width: 50%;
+      // margin: 0 auto;
       justify-content: center;
-      margin-bottom: 2rem;
+      align-items: center;
+      // margin-bottom: 2rem;
     }
 
     &__input {
       margin-right: 1rem;
-      width: 60%;
+      width: 70%;
       padding: 1rem;
       font-size: 1.5rem;
       border-radius: 0.5rem;
       border: none;
       font-family: inherit;
+      color: $color-grey-dark1;
 
       @media only screen and (max-width: $bp-medium) {
         padding: 0.8rem;
         font-size: 1.2rem;
+        width: 50%;
       }
     }
   }
 
+  &__hamburger-toggle {
+    margin-right: 1rem;
+    &__ham {
+      color: $primary-color;
+    }
+  }
+
   &__sort {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem;
+
     &__select {
-      margin-right: 1rem;
+      margin-left: 5rem;
+      width: 20rem;
+      font-family: inherit;
+
+      @media only screen and (max-width: $bp-large) {
+        width: 18rem;
+        font-size: 1.3rem;
+        margin-left: 0;
+      }
     }
 
-    @media only screen and (max-width: $bp-medium) {
+    &__btn {
+      @media only screen and (max-width: $bp-large) {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media only screen and (max-width: $bp-large) {
       width: 100%;
+      height: 50%;
       text-align: center;
+      padding: 2rem;
     }
   }
 }

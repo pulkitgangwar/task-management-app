@@ -25,27 +25,29 @@ const FilterNav = ({
 
   return (
     <div className="filternav">
-      <div
-        className="filternav__hamburger-toggle"
-        onClick={toggleFilterSidebar}
-      >
-        <GiHamburgerMenu size="4rem" />
-      </div>
-      <div className="filternav__search">
-        <input
-          className="filternav__search__input"
-          type="text"
-          placeholder="Search"
-          name="searchFilter"
-          value={searchFilter}
-          onChange={(e) => setSearchFilter(e.target.value)}
-        />
-        <button
-          onClick={handleClick}
-          className="filternav__search__btn btn btn--secondary"
+      <div className="filternav__ham-and-search">
+        <div
+          className="filternav__hamburger-toggle"
+          onClick={toggleFilterSidebar}
         >
-          Search
-        </button>
+          <GiHamburgerMenu size="4rem" />
+        </div>
+        <div className="filternav__search">
+          <input
+            className="filternav__search__input"
+            type="text"
+            placeholder="Search"
+            name="searchFilter"
+            value={searchFilter}
+            onChange={(e) => setSearchFilter(e.target.value)}
+          />
+          <button
+            onClick={handleClick}
+            className="filternav__search__btn btn btn--secondary"
+          >
+            Search
+          </button>
+        </div>
       </div>
       <div className="filternav__sort">
         <select
@@ -62,12 +64,14 @@ const FilterNav = ({
           <option value="DUE_DATE__ASC">Due Date Ascending</option>
           <option value="DUE_DATE__DESC">Due Date Descending</option>
         </select>
-        <button
-          onClick={resetAllFilters}
-          className="btn btn--danger btn--danger--small"
-        >
-          Reset Filters
-        </button>
+        <div className="filternav__sort__btn--wrapper">
+          <button
+            onClick={resetAllFilters}
+            className="btn btn--danger btn--danger--small filternav__sort__btn"
+          >
+            Reset Filters
+          </button>
+        </div>
       </div>
     </div>
   );

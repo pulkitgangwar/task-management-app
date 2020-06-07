@@ -1,13 +1,13 @@
 .task {
   width: 100%;
-  background-color: $color-grey-dark;
+  background-color: $color-grey-light1;
   //   height: 200px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  padding:1rem;
+  padding: 1rem;
   cursor: pointer;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 
   &__title-and-priority {
     width: 100%;
@@ -19,6 +19,38 @@
 
     &__title {
       width: 60%;
+      color: $primary-color;
+    }
+
+    &__priority {
+      // width: 13%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__color {
+        width: 2rem;
+        height: 2rem;
+
+        // height:100%;
+        border-radius: 100px;
+
+        &--LOW {
+          background-color: orange;
+        }
+        &--NORMAL {
+          background-color: yellow;
+        }
+        &--HIGH {
+          background-color: red;
+        }
+      }
+
+      &__label {
+        font-size: 1.5rem;
+        margin-left: 1rem;
+        text-transform: capitalize;
+      }
     }
   }
 
@@ -27,5 +59,14 @@
     justify-content: space-between;
     padding: 1rem;
     align-items: center;
+
+    &__label-icon {
+      text-transform: capitalize;
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      background-color: $primary-color;
+      font-size: 1.4rem !important;
+      color: $color-white;
+    }
   }
 }
