@@ -18,7 +18,7 @@ async function getTasks(filters) {
 
 // Fetch Task By Id
 async function getTaskById(id) {
-  return client(`/tasks${id}`, { method: "GET", secure: true });
+  return client(`/tasks/${id}`, { method: "GET", secure: true });
 }
 
 // Create a new Task
@@ -49,7 +49,7 @@ async function updateTaskById(
   id,
   { title, description, status, label, priority, due_date }
 ) {
-  return client(`/tasks${id}`, {
+  return client(`/tasks/${id}`, {
     method: "PUT",
     data: {
       title,
@@ -65,7 +65,7 @@ async function updateTaskById(
 
 // Deletes a task
 async function deleteTaskById(id) {
-  return client(`/tasks${id}`, { method: "DELETE", secure: true });
+  return client(`/tasks/${id}`, { method: "DELETE", secure: true });
 }
 
 export { getTasks, getTaskById, addTask, updateTaskById, deleteTaskById };
