@@ -31,7 +31,7 @@ const RegisterForm = () => {
         text: "Your account has been created successfully. You can login now",
         icon: "success",
         button: "Go to Login",
-        className: "btn btn--success",
+        className: "btn",
       });
       history.push("/login");
     } catch (error) {

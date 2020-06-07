@@ -31,12 +31,11 @@ const UserPopup = ({ isUserProfileOpen }) => {
           text: "Cancel",
           value: false,
           visible: true,
-          className: "btn btn--danger",
           closeModal: true,
         },
         confirm: {
           text: "Yes",
-          className: "btn btn--success",
+          className: "btn",
           value: true,
           closeModal: true,
         },
