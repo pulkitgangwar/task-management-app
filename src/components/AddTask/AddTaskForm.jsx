@@ -5,7 +5,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { Link } from "react-router-dom";
 import { addTask } from "../../api/task";
 
-const Form = () => {
+const AddTaskForm = () => {
   const [selectedDateAndTime, setSelectedDateAndTime] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState(EditorState.createEmpty());
@@ -68,7 +68,6 @@ const Form = () => {
           maxLength={32}
           required
           value={title}
-          autoComplete="off"
         />
       </div>
       <div className="form__container">
@@ -180,4 +179,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default AddTaskForm;
