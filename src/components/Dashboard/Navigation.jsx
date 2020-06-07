@@ -1,4 +1,5 @@
 import React from "react";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navigation = ({ toggleUserProfile }) => {
   return (
@@ -7,10 +8,10 @@ const Navigation = ({ toggleUserProfile }) => {
         <h2 className="navigation__heading__logo">Logo</h2>
       </div>
       <div className="navigation__for-user">
-        <div
+        <FaUserCircle
           className="navigation__for-user__hamburger"
           onClick={toggleUserProfile}
-        ></div>
+        />
       </div>
     </nav>
   );

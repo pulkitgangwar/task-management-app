@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import md5 from "blueimp-md5";
 import swal from "@sweetalert/with-react";
 import { useAuth } from "../../context/Auth.context";
 
@@ -38,7 +39,12 @@ const UserPopup = ({ isUserProfileOpen }) => {
   return (
     <div className={`userpopup ${isUserProfileOpen ? "userpopup__on" : ""}`}>
       <div className="userpopup__details">
-        <div className="userpopup__details__avatar"></div>
+        <div className="userpopup__details__avatar">
+          <img
+            src={`https://gravatar.com/avatar/${md5(userData.email)}?s=128`}
+            alt="User Avatar"
+          />
+        </div>
         <h3 className="userpopup__details__name">
           {userData.name || "Anonymous"}
         </h3>
