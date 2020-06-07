@@ -51,7 +51,7 @@ const FilterNav = ({
       </div>
       <div className="filternav__sort">
         <select
-          className="filternav__sort__select"
+          className="select filternav__sort__select"
           value={filters.sortKey}
           onChange={handleSelectValueChange}
         >

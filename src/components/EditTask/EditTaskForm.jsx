@@ -84,7 +84,7 @@ const EditTaskForm = ({ task }) => {
           </label>
           <select
             id="form__input--status"
-            className="form__input__status"
+            className="select form__input__status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             required
@@ -100,7 +100,7 @@ const EditTaskForm = ({ task }) => {
           </label>
           <select
             id="form__input--label"
-            className="form__input__label"
+            className="select form__input__label"
             value={label}
             onChange={(e) => setLabel(e.target.value)}
             required
@@ -120,7 +120,7 @@ const EditTaskForm = ({ task }) => {
           </label>
           <select
             id="form__input--priority"
-            className="form__input__priority"
+            className="select form__input__priority"
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
             required
