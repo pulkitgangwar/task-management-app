@@ -24,8 +24,10 @@
       position: absolute;
       bottom: -4rem;
       right: 5rem;
+      display: none;
 
       @media only screen and (max-width: $bp-largest) {
+        display: block;
         font-size: 7rem;
         bottom: -3rem;
       }
@@ -42,8 +44,10 @@
       position: absolute;
       bottom: 17rem;
       right: -19rem;
+      display: none;
 
       @media only screen and (max-width: $bp-largest) {
+        display: block;
         font-size: 5rem;
         bottom: 14rem;
         right: -16rem;
@@ -52,6 +56,23 @@
       @media only screen and (max-width: $bp-large) {
         display: none;
       }
+    }
+  }
+
+  &__image {
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &__img {
+      width: 100%;
+      // object-fit: contain;
+    }
+
+    @media only screen and (max-width: $bp-largest) {
+      display: none;
     }
   }
 }

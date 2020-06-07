@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /**
  *  Sidebar Component
@@ -6,7 +7,16 @@ import React from "react";
 const SideBar = () => {
   return (
     <div className="sidebar">
-      <h3 className="sidebar__logo">Logo</h3>
+      <Link className="sidebar__logo" to="/">
+        <h2>TASK APP</h2>
+      </Link>
+      <div className="sidebar__image">
+        <img
+          src="/images/illustration.svg"
+          alt="illustration"
+          className="sidebar__image__img"
+        />
+      </div>
       <h1 className="sidebar__placeholder__main">TASK</h1>
       <h2 className="sidebar__placeholder__sub">MANAGEMENT</h2>
     </div>
