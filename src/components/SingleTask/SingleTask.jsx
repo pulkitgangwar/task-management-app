@@ -5,7 +5,6 @@ import draftToHtml from "draftjs-to-html";
 import swal from "@sweetalert/with-react";
 import useFetch from "../../hooks/useFetch";
 import { deleteTaskById } from "../../api/task";
-import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 import Loading from "../Loading/Loading";
 
 /**
@@ -80,8 +79,7 @@ const SingleTask = ({ match, history }) => {
   return (
     <div className="singletask">
       <div className="singletask__wrapper">
-        <FloatingAnchor path="/" title="Go back" />
-        <div className="singletask__cta-btns">
+        <div className="singletask__cta-btns singletask__cta-btns--1">
           <Link className="btn singletask__cta-btns__edit" to={`/edit/${id}`}>
             Edit Task
           </Link>
