@@ -1,69 +1,76 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Redirect } from "react-router-dom";
 import { formatDistance, format } from "date-fns";
-
-// importing TaskClient
-import { taskClient } from "../../apiClients/TaskClient";
-
-// importing components
+import draftToHtml from "draftjs-to-html";
+import swal from "@sweetalert/with-react";
+import useFetch from "../../hooks/useFetch";
+import { deleteTaskById } from "../../api/task";
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 import Loading from "../Loading/Loading";
 
 const SingleTask = ({ match, history }) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [task, setTask] = useState(null);
+  const id = match.params.id;
+  const [data, isLoading, isError] = useFetch(`/tasks/${id}`);
 
-  useEffect(() => {
-    const getTaskById = async () => {
-      try {
-        const taskObj = await taskClient.getTaskById(match.params.id);
+  const handleEdit = () => {
+    history.push(`/edit/${id}`);
+  };
 
-        console.log(taskObj);
-        setTask(taskObj);
-        setLoading(false);
-        setError(null);
-      } catch (err) {
-        setError(err);
-        setLoading(false);
+  if (isError) {
+    return <Redirect to="/404" />;
+  }
 
-        console.log(err);
-      }
-    };
-    getTaskById();
-  }, [match.params.id]);
+  const handleDelete = async () => {
+    const userOption = await swal({
+      title: "Delete Task",
+      text: "Are you sure, you want to delete this task ?",
+      icon: "warning",
+      buttons: {
+        cancel: {
+          text: "Cancel",
+          value: false,
+          visible: true,
+          closeModal: true,
+        },
+        confirm: {
+          text: "Yes",
+          value: true,
+          closeModal: true,
+        },
+      },
+    });
+    if (!userOption) return;
+    try {
+      const response = await deleteTaskById(id);
+      await swal({
+        title: "Exam deleted successfully!",
+        text: response?.message,
+        icon: "success",
+      });
+      history.push("/");
+    } catch (e) {
+      swal({
+        title: "Task could not be deleted!",
+        text: e?.response?.message,
+        icon: "error",
+      });
+    }
+  };
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
-  if (!loading && error) {
-    return <h1>Sorry Task Not Found</h1>;
-  }
-
   const {
-    id,
     title,
     description,
     created_at,
+    updated_at,
     due_date,
     label,
     priority,
     status,
-  } = task;
-
-  const handleEdit = () => {
-    history.push(`/edittask/${id}`);
-  };
-
-  const deleteTaskById = async (id) => {
-    try {
-      await taskClient.deleteTaskById(id);
-
-      history.push("/");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  } = data;
 
   return (
     <div className="singletask">
@@ -78,22 +85,23 @@ const SingleTask = ({ match, history }) => {
           </button>
           <button
             className="btn btn--danger singletask__cta-btns__delete"
-            onClick={() => deleteTaskById(task.id)}
+            onClick={() => handleDelete(id)}
           >
             Delete
           </button>
         </div>
         <div className="singletask__title">
-          <p className="singletask__title__placeholder">Title</p>
           <h3 className="heading-tertiary singletask__title__title ">
             {title}
           </h3>
         </div>
         <div className="singletask__description">
-          <p className="singletask__description__placeholder">Description</p>
-          <p className="paragraph-primary singletask__description__description">
-            {description ? description : "Add a Description to your task"}
-          </p>
+          <p
+            className="paragraph-primary singletask__description__description"
+            dangerouslySetInnerHTML={{
+              __html: draftToHtml(JSON.parse(description)),
+            }}
+          ></p>
         </div>
         <div className="singletask__task-info">
           <div className="singletask__task-info__div">
@@ -117,23 +125,29 @@ const SingleTask = ({ match, history }) => {
         </div>
         <div className="singletask__time">
           <div className="singletask__time__due_date">
-            <p className="singletask__time__due_date__placeholder">
-              Due date and time
-            </p>
+            <p className="singletask__time__due_date__placeholder">Due By</p>
             <h3 className="singletask__time__due_date__due_date singletask__value">
               {due_date
-                ? formatDistance(new Date(due_date), new Date(), {
+                ? `${formatDistance(new Date(due_date), new Date(), {
                     addSuffix: true,
-                  })
-                : "Add due date and time"}
+                  })} (${format(new Date(due_date), "dd/MM/yyyy HH:mm:ss a")})`
+                : "No Deadline"}
             </h3>
           </div>
           <div className="singletask__time__created-at">
             <p className="singletask__time__created-at__placeholder">
-              Created at
+              Added
             </p>
             <h3 className="singletask__time__created-at__created-at singletask__value">
-              {format(new Date(created_at), "dd-MM-yyyy HH:mm:ss a")}
+              {format(new Date(created_at), "dd/MM/yyyy HH:mm:ss a")}
+            </h3>
+          </div>
+          <div className="singletask__time__created-at">
+            <p className="singletask__time__created-at__placeholder">
+              Updated
+            </p>
+            <h3 className="singletask__time__created-at__created-at singletask__value">
+              {format(new Date(updated_at), "dd/MM/yyyy HH:mm:ss a")}
             </h3>
           </div>
         </div>
