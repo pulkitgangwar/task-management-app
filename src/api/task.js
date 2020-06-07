@@ -11,6 +11,9 @@ async function getTasks(filters) {
         .join("&");
       return `${queryString}&${labelsQuery}`;
     }
+    if (filters[filterKey] instanceof Date) {
+      return `${queryString}&${filterKey}=${filters[filterKey].toISOString()}`;
+    }
     return `${queryString}&${filterKey}=${filters[filterKey]}`;
   }, "");
   return client(`/tasks?${filterParams}`, { method: "GET", secure: true });

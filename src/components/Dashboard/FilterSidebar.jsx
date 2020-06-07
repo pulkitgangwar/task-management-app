@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import DatePicker from "react-datepicker";
 import { statusValues, labelValues, priorityValues } from "./filterValues";
 
 const FilterSidebar = ({ isOpen, filters, setFilters }) => {
   const [statusOpen, setStatusOpen] = useState(true);
   const [priorityOpen, setPriorityOpen] = useState(true);
   const [labelOpen, setLabelOpen] = useState(false);
+  const [dueDateOpen, setDueDateOpen] = useState(false);
+  const [createdAtOpen, setCreatedAtOpen] = useState(false);
 
   const toggleStatus = (status) => {
     if (filters.status === status) {
@@ -141,6 +144,144 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   </li>
                 );
               })}
+            </ul>
+          </li>
+          <li className="filterSidebar__li filterSidebar__drop">
+            <div
+              className="filterSidebar__drop__title"
+              onClick={() => setDueDateOpen(!dueDateOpen)}
+            >
+              <p className="paragraph-primary">Due Date Filter</p>
+              <IoIosArrowDown />
+            </div>
+            <ul
+              className={`filterSidebar__drop__ul ${
+                dueDateOpen ? "filterSidebar__drop__ul--active" : ""
+              }`}
+            >
+              <div className="">
+                <label htmlFor="after-due-date">
+                  Due Date After{" "}
+                  <button
+                    className="btn btn--danger btn--danger--small"
+                    type="button"
+                    onClick={(e) =>
+                      setFilters({ ...filters, after_due_date: null })
+                    }
+                  >
+                    Clear
+                  </button>
+                </label>
+                <DatePicker
+                  id="after-due-date"
+                  selected={filters.after_due_date}
+                  showTimeSelect
+                  dateFormat="Pp"
+                  onChange={(date) => {
+                    setFilters({
+                      ...filters,
+                      after_due_date: date,
+                    });
+                  }}
+                  className=""
+                />
+              </div>
+              <div className="">
+                <label htmlFor="before-due-date">
+                  Due Date Before{" "}
+                  <button
+                    className="btn btn--danger btn--danger--small"
+                    type="button"
+                    onClick={(e) =>
+                      setFilters({ ...filters, before_due_date: null })
+                    }
+                  >
+                    Clear
+                  </button>
+                </label>
+                <DatePicker
+                  id="before-due-date"
+                  selected={filters.before_due_date}
+                  showTimeSelect
+                  dateFormat="Pp"
+                  onChange={(date) => {
+                    setFilters({
+                      ...filters,
+                      before_due_date: date,
+                    });
+                  }}
+                  className=""
+                />
+              </div>
+            </ul>
+          </li>
+          <li className="filterSidebar__li filterSidebar__drop">
+            <div
+              className="filterSidebar__drop__title"
+              onClick={() => setCreatedAtOpen(!createdAtOpen)}
+            >
+              <p className="paragraph-primary">Date Filter</p>
+              <IoIosArrowDown />
+            </div>
+            <ul
+              className={`filterSidebar__drop__ul ${
+                createdAtOpen ? "filterSidebar__drop__ul--active" : ""
+              }`}
+            >
+              <div className="">
+                <label htmlFor="after_created_at">
+                  Created After{" "}
+                  <button
+                    className="btn btn--danger btn--danger--small"
+                    type="button"
+                    onClick={(e) =>
+                      setFilters({ ...filters, after_created_at: null })
+                    }
+                  >
+                    Clear
+                  </button>
+                </label>
+                <DatePicker
+                  id="after_created_at"
+                  selected={filters.after_created_at}
+                  showTimeSelect
+                  dateFormat="Pp"
+                  onChange={(date) => {
+                    setFilters({
+                      ...filters,
+                      after_created_at: date,
+                    });
+                  }}
+                  className=""
+                />
+              </div>
+              <div className="">
+                <label htmlFor="before_created_at">
+                  Created Before{" "}
+                  <button
+                    className="btn btn--danger btn--danger--small"
+                    type="button"
+                    onClick={(e) =>
+                      setFilters({ ...filters, before_created_at: null })
+                    }
+                  >
+                    Clear
+                  </button>
+                </label>
+                <DatePicker
+                  id="before_created_at"
+                  selected={filters.before_created_at}
+                  showTimeSelect
+                  dateFormat="Pp"
+                  onChange={(date) => {
+                    setFilters({
+                      ...filters,
+                      before_created_at: date,
+                    });
+                  }}
+                  className=""
+                />
+              </div>
             </ul>
           </li>
         </ul>
