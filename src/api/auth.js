@@ -1,5 +1,12 @@
 import client from "./client";
 
+/**
+ * @description
+ * @param {*} name User's Name
+ * @param {*} email User's Email Address
+ * @param {*} password User's Password
+ * @returns Promise
+ */
 async function register(name, email, password) {
   return client("/auth/register", {
     method: "POST",
@@ -8,6 +15,12 @@ async function register(name, email, password) {
   });
 }
 
+/**
+ * @description
+ * @param {*} email User's Email Address
+ * @param {*} password User's Password
+ * @returns Promise
+ */
 async function login(email, password) {
   const {
     data: { access_token },

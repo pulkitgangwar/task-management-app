@@ -1,5 +1,9 @@
 import axios from "axios";
 
+/**
+ * Reads access token from localStorage
+ * @returns string
+ */
 function getToken() {
   let accessToken = window.localStorage.getItem("access");
 
@@ -8,11 +12,18 @@ function getToken() {
   return JSON.parse(accessToken);
 }
 
-const client = async (
+/**
+ * API Client using axios
+ * @param {string} endpoint route
+ * @param {object} clientSettings settings
+ * @param {object} customHeaders additional headers
+ * @returns Promise
+ */
+async function client(
   endpoint,
   { data = null, method = "GET", secure = true },
   customHeaders = {}
-) => {
+) {
   const config = {
     baseURL: process.env.REACT_APP_API_URL,
     timeout: 60000,
@@ -29,6 +40,6 @@ const client = async (
   }
 
   return axios.request(config);
-};
+}
 
 export default client;

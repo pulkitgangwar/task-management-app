@@ -1,6 +1,10 @@
 import client from "./client";
 
-// Fetch All Tasks
+/**
+ * Fetches Task that match provided filters
+ * @param {*} filters Filters Object
+ * @returns Promise
+ */
 async function getTasks(filters) {
   const filterParams = Object.keys(filters).reduce((queryString, filterKey) => {
     if (!filters[filterKey] || filters[filterKey].length === 0)
@@ -19,12 +23,27 @@ async function getTasks(filters) {
   return client(`/tasks?${filterParams}`, { method: "GET", secure: true });
 }
 
-// Fetch Task By Id
+/**
+ * Fetches a single task using ID
+ * @param {*} id Task's ID
+ * @returns Promise
+ */
 async function getTaskById(id) {
   return client(`/tasks/${id}`, { method: "GET", secure: true });
 }
 
-// Create a new Task
+/**
+ * Adds a new task
+ * @param {*} {
+ *   title,
+ *   description,
+ *   status,
+ *   label,
+ *   priority,
+ *   due_date,
+ * } Task Object
+ * @returns Promise
+ */
 async function addTask({
   title,
   description,
@@ -47,7 +66,12 @@ async function addTask({
   });
 }
 
-// Updates an existing Task
+/**
+ * Updates a task using ID
+ * @param {*} id
+ * @param {*} { title, description, status, label, priority, due_date } Task Object
+ * @returns Promise
+ */
 async function updateTaskById(
   id,
   { title, description, status, label, priority, due_date }
@@ -66,7 +90,11 @@ async function updateTaskById(
   });
 }
 
-// Deletes a task
+/**
+ * Deletes a Task using ID
+ * @param {*} id Task's ID
+ * @returns Promise
+ */
 async function deleteTaskById(id) {
   return client(`/tasks/${id}`, { method: "DELETE", secure: true });
 }
