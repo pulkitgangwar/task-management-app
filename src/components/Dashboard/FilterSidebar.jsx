@@ -165,11 +165,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                 dueDateOpen ? "filterSidebar__drop__ul--active" : ""
               }`}
             >
-              <div className="">
+              <div className="paragraph-secondary">
                 <label htmlFor="after-due-date">
                   Due Date After{" "}
                   <button
-                    className="btn btn--danger btn--danger--small"
+                    className="form__input__deadline-clean"
                     type="button"
                     onClick={(e) =>
                       setFilters({
@@ -187,6 +187,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   selected={filters.after_due_date}
                   showTimeSelect
                   dateFormat="Pp"
+                  withPortal
                   onChange={(date) => {
                     setFilters({
                       ...filters,
@@ -197,11 +198,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   className=""
                 />
               </div>
-              <div className="">
+              <div className="paragraph-secondary">
                 <label htmlFor="before-due-date">
                   Due Date Before{" "}
                   <button
-                    className="btn btn--danger btn--danger--small"
+                    className="form__input__deadline-clean"
                     type="button"
                     onClick={(e) =>
                       setFilters({
@@ -219,6 +220,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   selected={filters.before_due_date}
                   showTimeSelect
                   dateFormat="Pp"
+                  withPortal
                   onChange={(date) => {
                     setFilters({
                       ...filters,
@@ -244,11 +246,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                 createdAtOpen ? "filterSidebar__drop__ul--active" : ""
               }`}
             >
-              <div className="">
+              <div className="paragraph-secondary">
                 <label htmlFor="after_created_at">
                   Created After{" "}
                   <button
-                    className="btn btn--danger btn--danger--small"
+                    className="form__input__deadline-clean"
                     type="button"
                     onClick={(e) =>
                       setFilters({
@@ -266,6 +268,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   selected={filters.after_created_at}
                   showTimeSelect
                   dateFormat="Pp"
+                  withPortal
                   onChange={(date) => {
                     setFilters({
                       ...filters,
@@ -276,11 +279,11 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   className=""
                 />
               </div>
-              <div className="">
+              <div className="paragraph-secondary">
                 <label htmlFor="before_created_at">
                   Created Before{" "}
                   <button
-                    className="btn btn--danger btn--danger--small"
+                    className="form__input__deadline-clean"
                     type="button"
                     onClick={(e) =>
                       setFilters({
@@ -298,6 +301,7 @@ const FilterSidebar = ({ isOpen, filters, setFilters }) => {
                   selected={filters.before_created_at}
                   showTimeSelect
                   dateFormat="Pp"
+                  withPortal
                   onChange={(date) => {
                     setFilters({
                       ...filters,
