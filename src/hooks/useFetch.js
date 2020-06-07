@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import client from "../api/client";
 
-const useFetch = (url, cache = true) => {
+/**
+ * Custom hook to fetch and cache data
+ * @param {string} url
+ * @param {boolean} [cache=true]
+ * @returns [data, isLoading, isError]
+ */
+function useFetch(url, cache = true) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -40,6 +46,6 @@ const useFetch = (url, cache = true) => {
     fetchData();
   }, [cache, url]);
   return [data, isLoading, isError];
-};
+}
 
 export default useFetch;

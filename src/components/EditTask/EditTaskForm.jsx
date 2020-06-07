@@ -5,6 +5,9 @@ import { Editor } from "react-draft-wysiwyg";
 import { Link } from "react-router-dom";
 import { updateTaskById } from "../../api/task";
 
+/**
+ *  Edit Task Page Component
+ */
 const EditTaskForm = ({ task }) => {
   const [selectedDateAndTime, setSelectedDateAndTime] = useState(
     task.due_date ? new Date(task.due_date) : null
@@ -20,6 +23,9 @@ const EditTaskForm = ({ task }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
 
+  /**
+   *  Handles Update Task Form submission
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

@@ -3,6 +3,9 @@ import { IoIosArrowDown } from "react-icons/io";
 import DatePicker from "react-datepicker";
 import { statusValues, labelValues, priorityValues } from "./filterValues";
 
+/**
+ *  Sidebar Component for Filters
+ */
 const FilterSidebar = ({ isOpen, filters, setFilters }) => {
   const [statusOpen, setStatusOpen] = useState(true);
   const [priorityOpen, setPriorityOpen] = useState(true);

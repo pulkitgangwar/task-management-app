@@ -7,10 +7,16 @@ import EditTaskForm from "./EditTaskForm";
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 import Loading from "../Loading/Loading";
 
+/**
+ *  Edit Task Page Component
+ */
 const EditTask = ({ history, match }) => {
   const id = match.params.id;
   const [task, isLoading, isError] = useFetch(`/tasks/${id}`);
 
+  /**
+   *  Deletes Task after user confirmation
+   */
   const handleDelete = async () => {
     const userOption = await swal({
       title: "Delete Task",
@@ -48,6 +54,9 @@ const EditTask = ({ history, match }) => {
     }
   };
 
+  /**
+   *  Redirect to 404 page on error
+   */
   if (isError) {
     return <Redirect to="/404" />;
   }

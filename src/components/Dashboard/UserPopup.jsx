@@ -3,14 +3,24 @@ import md5 from "blueimp-md5";
 import swal from "@sweetalert/with-react";
 import { useAuth } from "../../context/Auth.context";
 
+/**
+ *  User Details Component
+ */
 const UserPopup = ({ isUserProfileOpen }) => {
   const { logout } = useAuth();
+
+  /**
+   *  Parse access token to get user's data
+   */
   const userData = useMemo(() => {
     return JSON.parse(
       atob(JSON.parse(localStorage.getItem("access")).split(".")[1])
     );
   }, []);
 
+  /**
+   *  Logout user after user confirmation
+   */
   const handleLogout = async () => {
     const userOption = await swal({
       title: "Logging Out",

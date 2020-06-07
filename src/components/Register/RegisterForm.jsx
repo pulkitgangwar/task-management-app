@@ -3,6 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import swal from "@sweetalert/with-react";
 import { register } from "../../api/auth";
 
+/**
+ *  Registration Form Component
+ */
 const RegisterForm = () => {
   const history = useHistory();
 
@@ -12,6 +15,9 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  /**
+   *  Handles Registration Form submission
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

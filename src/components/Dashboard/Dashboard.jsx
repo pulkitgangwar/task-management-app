@@ -8,6 +8,9 @@ import FilterSidebar from "./FilterSidebar";
 import Pagination from "./Pagination";
 import initialFilterState from "./initialFilterState";
 
+/**
+ *  Dashboard Component renders all tasks
+ */
 const Dashboard = ({ history }) => {
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(
     Boolean(window.innerWidth > 1000)

@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ *  Loading Screen Component
+ */
 const Loading = () => {
   return (
     <div className="loading">

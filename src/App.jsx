@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-
-// importing Components
 import UnAuthApp from "./components/UnAuthApp";
 import AuthApp from "./components/AuthApp";
-
-// importing context consumer
 import { AuthContext } from "./context/Auth.context";
 
+/**
+ *  Main App Component renders component tress according to login status
+ */
 const App = () => {
   const { isLoggedIn } = useContext(AuthContext);
 

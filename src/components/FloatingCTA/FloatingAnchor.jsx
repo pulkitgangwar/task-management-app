@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ *  Floating Anchor Component
+ */
 const FloatingAnchor = ({ path, title }) => {
   return (
     <div className="floatinganchor">

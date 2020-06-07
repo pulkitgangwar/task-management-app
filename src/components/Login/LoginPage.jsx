@@ -1,9 +1,10 @@
 import React from "react";
-
-// importing Components
 import SideBar from "../SideBar";
 import LoginForm from "./LoginForm";
 
+/**
+ *  Login Page Component
+ */
 const LoginPage = () => {
   return (
     <div className="login">

@@ -1,3 +1,6 @@
+/**
+ *  Default State of Filters
+ */
 const initialFilterState = {
   limit: 10,
   offset: 0,

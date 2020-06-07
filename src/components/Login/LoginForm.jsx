@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/Auth.context";
 import { login } from "../../api/auth";
 
+/**
+ *  Login Form Component
+ */
 const LoginForm = () => {
   const { onLogin } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -10,6 +13,9 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  /**
+   *  Handles Login Form submission
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

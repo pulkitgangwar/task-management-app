@@ -2,11 +2,16 @@ import React, { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
 import Loading from "./Loading/Loading";
 
-// lazy loading components
+/**
+ *  Lazy Loading components for Code-Splitting
+ */
 const LoginPage = lazy(() => import("./Login/LoginPage"));
 const RegisterPage = lazy(() => import("./Register/RegisterPage"));
 const NotFound = lazy(() => import("./NotFoundPage/NotFoundPage"));
 
+/**
+ *  Routes for logged-out users
+ */
 const UnAuthApp = () => {
   return (
     <Suspense fallback={<Loading />}>

@@ -2,6 +2,9 @@ import React from "react";
 import SideBar from "../SideBar";
 import RegisterForm from "./RegisterForm";
 
+/**
+ *  Registration Page Component
+ */
 const RegisterPage = () => {
   return (
     <div className="register">

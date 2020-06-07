@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { formatDistance, format } from "date-fns";
 import draftToHtml from "draftjs-to-html";
 import swal from "@sweetalert/with-react";
@@ -8,18 +8,23 @@ import { deleteTaskById } from "../../api/task";
 import FloatingAnchor from "../FloatingCTA/FloatingAnchor";
 import Loading from "../Loading/Loading";
 
+/**
+ *  Single Task Page Component
+ */
 const SingleTask = ({ match, history }) => {
   const id = match.params.id;
   const [data, isLoading, isError] = useFetch(`/tasks/${id}`);
 
-  const handleEdit = () => {
-    history.push(`/edit/${id}`);
-  };
-
+  /**
+   *  Redirect to 404 page on error
+   */
   if (isError) {
     return <Redirect to="/404" />;
   }
 
+  /**
+   * Deletes a task after user confirmation
+   */
   const handleDelete = async () => {
     const userOption = await swal({
       title: "Delete Task",
@@ -77,12 +82,9 @@ const SingleTask = ({ match, history }) => {
       <div className="singletask__wrapper">
         <FloatingAnchor path="/" title="Go back" />
         <div className="singletask__cta-btns">
-          <button
-            className="btn singletask__cta-btns__edit"
-            onClick={handleEdit}
-          >
+          <Link className="btn singletask__cta-btns__edit" to={`/edit/${id}`}>
             Edit Task
-          </button>
+          </Link>
           <button
             className="btn btn--danger singletask__cta-btns__delete"
             onClick={() => handleDelete(id)}
@@ -135,17 +137,13 @@ const SingleTask = ({ match, history }) => {
             </h3>
           </div>
           <div className="singletask__time__created-at">
-            <p className="singletask__time__created-at__placeholder">
-              Added
-            </p>
+            <p className="singletask__time__created-at__placeholder">Added</p>
             <h3 className="singletask__time__created-at__created-at singletask__value">
               {format(new Date(created_at), "dd/MM/yyyy HH:mm:ss a")}
             </h3>
           </div>
           <div className="singletask__time__created-at">
-            <p className="singletask__time__created-at__placeholder">
-              Updated
-            </p>
+            <p className="singletask__time__created-at__placeholder">Updated</p>
             <h3 className="singletask__time__created-at__created-at singletask__value">
               {format(new Date(updated_at), "dd/MM/yyyy HH:mm:ss a")}
             </h3>

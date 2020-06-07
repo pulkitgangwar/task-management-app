@@ -2,19 +2,23 @@ import client from "./client";
 
 /**
  * Fetches Task that match provided filters
- * @param {*} filters Filters Object
+ * @param {object} filters Filters Object
  * @returns Promise
  */
 async function getTasks(filters) {
+  // Reduce filter properties to generate queryString
   const filterParams = Object.keys(filters).reduce((queryString, filterKey) => {
+    // Filter is not applied
     if (!filters[filterKey] || filters[filterKey].length === 0)
       return queryString;
+    // Label Filter should be an array
     if (filterKey === "labels") {
       const labelsQuery = filters[filterKey]
         .map((singleLabel) => `labels[]=${singleLabel}`)
         .join("&");
       return `${queryString}&${labelsQuery}`;
     }
+    // Date filters have to be converted to ISOString
     if (filters[filterKey] instanceof Date) {
       return `${queryString}&${filterKey}=${filters[filterKey].toISOString()}`;
     }
@@ -25,7 +29,7 @@ async function getTasks(filters) {
 
 /**
  * Fetches a single task using ID
- * @param {*} id Task's ID
+ * @param {string|number} id Task's ID
  * @returns Promise
  */
 async function getTaskById(id) {
@@ -34,7 +38,7 @@ async function getTaskById(id) {
 
 /**
  * Adds a new task
- * @param {*} {
+ * @param {object} {
  *   title,
  *   description,
  *   status,
@@ -68,8 +72,8 @@ async function addTask({
 
 /**
  * Updates a task using ID
- * @param {*} id
- * @param {*} { title, description, status, label, priority, due_date } Task Object
+ * @param {string|number} id
+ * @param {object} { title, description, status, label, priority, due_date } Task Object
  * @returns Promise
  */
 async function updateTaskById(
@@ -92,7 +96,7 @@ async function updateTaskById(
 
 /**
  * Deletes a Task using ID
- * @param {*} id Task's ID
+ * @param {string|number} id Task's ID
  * @returns Promise
  */
 async function deleteTaskById(id) {

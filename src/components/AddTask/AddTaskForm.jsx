@@ -5,6 +5,9 @@ import { Editor } from "react-draft-wysiwyg";
 import { Link } from "react-router-dom";
 import { addTask } from "../../api/task";
 
+/**
+ *  Add New Task Form Component
+ */
 const AddTaskForm = () => {
   const [selectedDateAndTime, setSelectedDateAndTime] = useState(null);
   const [title, setTitle] = useState("");
@@ -16,6 +19,9 @@ const AddTaskForm = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
 
+  /**
+   *  Handles Add Task Form Submission
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

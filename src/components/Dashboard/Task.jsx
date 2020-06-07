@@ -2,6 +2,9 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { formatDistance } from "date-fns";
 
+/**
+ *  Single Task Row Component
+ */
 const Task = ({ task }) => {
   const { push } = useHistory();
   const { id, title, status, due_date, label, priority } = task;

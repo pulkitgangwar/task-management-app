@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
+/**
+ *  Search and Sort Filters Component
+ */
 const FilterNav = ({
   filters,
   setFilters,
@@ -36,7 +39,6 @@ const FilterNav = ({
           name="searchFilter"
           value={searchFilter}
           onChange={(e) => setSearchFilter(e.target.value)}
-          autoComplete="off"
         />
         <button
           onClick={handleClick}

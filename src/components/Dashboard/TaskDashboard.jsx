@@ -1,6 +1,9 @@
 import React from "react";
 import Task from "./Task";
 
+/**
+ *  Tasks Components renders tasks
+ */
 const TaskDashboard = ({ tasks, searchFilterValue }) => {
   return (
     <div className="taskdashboard__task">

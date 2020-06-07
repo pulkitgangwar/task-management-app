@@ -2,9 +2,9 @@ import client from "./client";
 
 /**
  * @description
- * @param {*} name User's Name
- * @param {*} email User's Email Address
- * @param {*} password User's Password
+ * @param {string} name User's Name
+ * @param {string} email User's Email Address
+ * @param {string} password User's Password
  * @returns Promise
  */
 async function register(name, email, password) {
@@ -17,8 +17,8 @@ async function register(name, email, password) {
 
 /**
  * @description
- * @param {*} email User's Email Address
- * @param {*} password User's Password
+ * @param {string} email User's Email Address
+ * @param {string} password User's Password
  * @returns Promise
  */
 async function login(email, password) {

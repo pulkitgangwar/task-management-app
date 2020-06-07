@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 
+/**
+ *  Header Main Menu
+ */
 const Navigation = ({ toggleUserProfile }) => {
   return (
     <nav className="navigation">
