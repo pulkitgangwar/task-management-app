@@ -51,14 +51,14 @@ const FilterNav = ({
           value={filters.sortKey}
           onChange={handleSelectValueChange}
         >
-          <option value="CREATED_AT__ASC">Ascending (Created At)</option>
-          <option value="CREATED_AT__DESC">Descending (Created At)</option>
-          <option value="UPDATED_AT__ASC">Ascending (Updated At)</option>
-          <option value="UPDATED_AT__DESC">Descending (Updated At)</option>
-          <option value="TITLE__ASC">Ascending (Title (A-Z))</option>
-          <option value="TITLE__DESC">Descending (Title (Z-A))</option>
-          <option value="DUE_DATE__ASC">Ascending (Due Date)</option>
-          <option value="DUE_DATE__DESC">Descending (Due Date)</option>
+          <option value="CREATED_AT__ASC">Created Ascending</option>
+          <option value="CREATED_AT__DESC">Created Descending</option>
+          <option value="UPDATED_AT__ASC">Updated Ascending</option>
+          <option value="UPDATED_AT__DESC">Updated Descending</option>
+          <option value="TITLE__ASC">Title Ascending (A-Z)</option>
+          <option value="TITLE__DESC">Title Descending (Z-A)</option>
+          <option value="DUE_DATE__ASC">Due Date Ascending</option>
+          <option value="DUE_DATE__DESC">Due Date Descending</option>
         </select>
         <button
           onClick={resetAllFilters}
