@@ -2,6 +2,36 @@
 
 Task Management FrontEnd built for [HackerEarth StackHack 1.0](https://www.hackerearth.com/challenges/hackathon/stackhack-v1/).
 
+## Build With
+
+- react
+- react-router
+- sass
+
+## Features
+
+- Add Tasks easily with a WYSIWYG editor.
+
+- You can embed images, videos (including youtube), webpages and more
+
+- Tasks can be edited and deleted anytime.
+
+- No one other than you can view your tasks. Protected using
+
+- You can use labels to define your tasks (ex work,shopping)
+
+- You can choose a deadline for each task.
+
+- Filter tasks according to status, label, priority, deadline and date.
+
+- Filters can be mixed to fetch the exact tasks as you need.
+
+- Easily search for a task
+
+- Sort your tasks according to title,deadline(supports time and date),created date,updated date in both ascending and desc order.
+
+- Responsive app
+
 ## Installation
 
 ```bash
