@@ -39,7 +39,7 @@ const EditTask = ({ history, match }) => {
     try {
       const response = await deleteTaskById(id);
       await swal({
-        title: "Exam deleted successfully!",
+        title: "Task deleted successfully!",
         text: response?.message,
         icon: "success",
       });

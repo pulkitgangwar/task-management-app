@@ -47,7 +47,7 @@ const SingleTask = ({ match, history }) => {
     try {
       const response = await deleteTaskById(id);
       await swal({
-        title: "Exam deleted successfully!",
+        title: "Task deleted successfully!",
         text: response?.message,
         icon: "success",
       });
