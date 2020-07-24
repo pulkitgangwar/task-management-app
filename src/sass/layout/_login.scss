@@ -10,6 +10,7 @@
   &__sidebar {
     width: 30%;
     height: 100%;
+    animation: slideIn .5s ease-in-out;
 
     @media only screen and (max-width: $bp-large) {
       width: 100%;

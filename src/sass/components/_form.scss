@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  animation: slideIn 0.5s ease-in-out;
 
   @media only screen and (max-width: $bp-medium) {
     width: 100%;
@@ -15,13 +16,11 @@
     margin-bottom: 5rem;
     font-size: 6rem;
 
-    &--custom{
-      margin-top:18rem;
+    &--custom {
+      margin-top: 18rem;
 
-      
-
-      @media only screen and (max-width:$bp-medium){
-        margin-top:15rem;
+      @media only screen and (max-width: $bp-medium) {
+        margin-top: 15rem;
       }
     }
 
