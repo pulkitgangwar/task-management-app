@@ -36,15 +36,20 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit} data-testid="form">
       <h1 className="form__heading heading-primary">Login</h1>
 
-      {error && <p className="error">{error}</p>}
+      {error && (
+        <p className="error" data-testid="error">
+          {error}
+        </p>
+      )}
       <div className="form__div form__div--email">
         <label htmlFor="form__input--email" className="form__label">
           Email
         </label>
         <input
+          data-testid="form__input--email"
           type="email"
           className="form__input"
           id="form__input--email"
@@ -59,6 +64,7 @@ const LoginForm = () => {
           Password
         </label>
         <input
+          data-testid="form__input--password"
           type="password"
           className="form__input"
           id="form__input--password"
@@ -72,7 +78,11 @@ const LoginForm = () => {
       </div>
 
       <div className="form__btn--wrapper">
-        <button disabled={loading} className="form__btn btn">
+        <button
+          disabled={loading}
+          data-testid="form__btn--submit"
+          className="form__btn btn"
+        >
           {loading ? "Loading ..." : "Login"}
         </button>
       </div>
