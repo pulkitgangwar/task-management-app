@@ -1,6 +1,5 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AuthProvider from "../context/Auth.context";
 import LoginForm from "../components/Login/LoginForm";
@@ -40,8 +39,8 @@ describe("testing", () => {
     const email = getByTestId("form__input--email");
     const password = getByTestId("form__input--password");
 
-    userEvent.type(email, emailChanges);
-    userEvent.type(password, passwordChanges);
+    fireEvent.change(email, { target: { value: emailChanges } });
+    fireEvent.change(password, { target: { value: passwordChanges } });
 
     expect(email.value).toEqual(emailChanges);
     expect(password.value).toEqual(passwordChanges);
