@@ -1,8 +1,8 @@
 ## Description
 
-Task Management FrontEnd built for [HackerEarth StackHack 1.0](https://www.hackerearth.com/challenges/hackathon/stackhack-v1/).
+Task Management App frontend
 
-## Build With
+## Built With
 
 - react
 - react-router
