@@ -18,7 +18,7 @@
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "react-scripts": "4.0.2"
   },
   "scripts": {
